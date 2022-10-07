@@ -48,13 +48,12 @@ class ExtrasMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	public static var bgPaths:Array<String> = 
 	[
-		'backgrounds/SUSSUS AMOGUS',
-		'backgrounds/SwagnotrllyTheMod',
-		'backgrounds/Olyantwo',
-		'backgrounds/morie',
-		'backgrounds/mantis',
-		'backgrounds/mamakotomi',
-		'backgrounds/T5mpler'
+		'backgrounds/biorange',
+		'backgrounds/cudroid',
+		'backgrounds/dreambean',
+		'backgrounds/roflcopter',
+		'backgrounds/vio',
+		'backgrounds/zevisly'
 	];
 
 	override function create()

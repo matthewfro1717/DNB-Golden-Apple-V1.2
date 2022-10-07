@@ -28,7 +28,7 @@ class PlayMenuState extends MusicBeatState
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
-	var optionShit:Array<String> = ['disruption', 'applecore', 'disability', 'wireframe', 'algebra', 'extras'];
+	var optionShit:Array<String> = ['disruption', 'applecore', 'disability', 'wireframe', 'algebra', 'deformation', 'ferocious', 'extras'];
 
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
@@ -54,13 +54,12 @@ class PlayMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	public static var bgPaths:Array<String> = 
 	[
-		'backgrounds/SUSSUS AMOGUS',
-		'backgrounds/SwagnotrllyTheMod',
-		'backgrounds/Olyantwo',
-		'backgrounds/morie',
-		'backgrounds/mantis',
-		'backgrounds/mamakotomi',
-		'backgrounds/T5mpler'
+		'backgrounds/biorange',
+		'backgrounds/cudroid',
+		'backgrounds/dreambean',
+		'backgrounds/roflcopter',
+		'backgrounds/vio',
+		'backgrounds/zevisly'
 	];
 
 	override function create()
@@ -110,8 +109,6 @@ class PlayMenuState extends MusicBeatState
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
-		var tex = Paths.getSparrowAtlas('FNF_main_menu_assets');
-
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 
@@ -120,6 +117,7 @@ class PlayMenuState extends MusicBeatState
 		camFollow.setPosition(640, 150.5);
 		for (i in 0...optionShit.length)
 		{
+			var tex = Paths.getSparrowAtlas('buttons/' + optionShit[i]);
 			var menuItem:FlxSprite = new FlxSprite(0, FlxG.height * 1.6);
 			menuItem.frames = tex;
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);

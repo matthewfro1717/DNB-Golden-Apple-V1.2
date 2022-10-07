@@ -50,13 +50,12 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	public static var bgPaths:Array<String> = 
 	[
-		'backgrounds/SUSSUS AMOGUS',
-		'backgrounds/SwagnotrllyTheMod',
-		'backgrounds/Olyantwo',
-		'backgrounds/morie',
-		'backgrounds/mantis',
-		'backgrounds/mamakotomi',
-		'backgrounds/T5mpler'
+		'backgrounds/biorange',
+		'backgrounds/cudroid',
+		'backgrounds/dreambean',
+		'backgrounds/roflcopter',
+		'backgrounds/vio',
+		'backgrounds/zevisly'
 	];
 
 	override function create()
@@ -106,8 +105,6 @@ class MainMenuState extends MusicBeatState
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
-		var tex = Paths.getSparrowAtlas('FNF_main_menu_assets');
-
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 
@@ -125,6 +122,7 @@ class MainMenuState extends MusicBeatState
 			}
 			else 
 			{
+				var tex = Paths.getSparrowAtlas('buttons/' + optionShit[i]);
 				menuItem.frames = tex;
 				menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 				menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);

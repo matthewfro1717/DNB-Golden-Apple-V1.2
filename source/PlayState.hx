@@ -982,6 +982,8 @@ class PlayState extends MusicBeatState
 					add(i);
 				}
 				
+			case 'ferocious':
+				//todo later since im very tired.
 
 			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness' | 'disruption' | 'disability' | 'origin' | 'metallic' | 'strawberry' | 'keyboard':
 				defaultCamZoom = 0.9;
@@ -2954,7 +2956,6 @@ class PlayState extends MusicBeatState
 
 				if (SONG.validScore)
 				{
-					NGio.unlockMedal(60961);
 					Highscore.saveWeekScore(storyWeek, campaignScore,
 						storyDifficulty, characteroverride == "none" || characteroverride == "bf" ? "bf" : characteroverride);
 				}

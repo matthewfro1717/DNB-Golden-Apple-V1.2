@@ -37,12 +37,12 @@ class OptionsMenu extends MusicBeatState
 		
 		trace(controlsStrings);
 
+		menuBG.loadGraphic(MainMenuState.randomizeBG());
 		menuBG.color = 0xFFea71fd;
 		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
 		menuBG.updateHitbox();
 		menuBG.screenCenter();
 		menuBG.antialiasing = true;
-		menuBG.loadGraphic(MainMenuState.randomizeBG());
 		add(menuBG);
 
 		grpControls = new FlxTypedGroup<Alphabet>();
@@ -156,11 +156,7 @@ class OptionsMenu extends MusicBeatState
 	}
 
 	function changeSelection(change:Int = 0)
-	{
-		#if !switch
-		// NGio.logEvent('Fresh');
-		#end
-		
+	{		
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
 		curSelected += change;
