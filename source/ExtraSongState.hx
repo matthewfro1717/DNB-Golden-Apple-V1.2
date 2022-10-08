@@ -38,13 +38,13 @@ class ExtraSongState extends MusicBeatState
 		0xFF00FFFF, //SPLIT THE THONNNNN
 		0xFF000000 // sart.
     ];
+
+	public static var category:Int = 0;
     
     private var grpSongs:FlxTypedGroup<Alphabet>;
 
     override function create() 
-	{
-
-		
+	{	
 		if (!FlxG.sound.music.playing)
 		{
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
@@ -54,8 +54,14 @@ class ExtraSongState extends MusicBeatState
 
         bg.loadGraphic(MainMenuState.randomizeBG());
 		bg.color = 0xFF4965FF;
+		bg.screenCenter();
 		add(bg);
         
+		switch (category) {
+			case 0:
+				//categories in order but rn im way to fucking tired.
+		}
+
 		addWeek(['Sugar-Rush', 'Origin', 'Metallic', 'Strawberry', 'Keyboard', 'Cycles'], 2, ['bandu-candy', 'bandu-origin', 'ringi', 'bambom', 'bendu', 'sart-producer']);
         addWeek(['Thunderstorm', 'Wheels', 'Dave-x-Bambi-Shipping-Cute', 'RECOVERED-PROJECT'], 1, ['dave-png', 'dave-wheels', 'dave-good', 'RECOVERED_PROJECT']);
 		addWeek(['Sart-Producer'], 4, ['sart-producer']);

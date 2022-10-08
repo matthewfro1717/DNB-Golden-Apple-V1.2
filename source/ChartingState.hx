@@ -58,8 +58,7 @@ class ChartingState extends MusicBeatState
 	var bullshitUI:FlxGroup;
 
 	var noteType:Int = 0;
-	var styles:Array<String> = ['normal', 'phone'];
-
+	var styles:Array<String> = ['normal', 'phone', 'police', 'magic'];
 	var noteTypeText:FlxText = new FlxText(-200, 0, 0,'Charting: Note', 16);
 
 	var highlight:FlxSprite;
@@ -649,22 +648,30 @@ class ChartingState extends MusicBeatState
 					FlxG.sound.music.play();
 				}
 			}
-			if(FlxG.keys.justPressed.Z)
-			{
-				this.noteType--;
-				if(noteType < 0)
-				{
+			
+			if (FlxG.keys.justPressed.Z) {
+				this.noteType -= 1;
+	
+				if (noteType < 0) {
 					noteType = styles.length - 1;
 				}
+	
+				noteTypeText.text = "Charting: " + styles[noteType];
+	
+				trace('Selected note: ' + styles[noteType]);
 			}
-			if(FlxG.keys.justPressed.X)
-				{
-					this.noteType++;
-					if(noteType == styles.length)
-					{
-						noteType = 0;
-					}
+	
+			if (FlxG.keys.justPressed.X) {
+				this.noteType += 1;
+	
+				if (noteType == styles.length) {
+					noteType = 0;
 				}
+	
+				noteTypeText.text = "Charting: " + styles[noteType];
+	
+				trace('Selected note: ' + styles[noteType]);
+			}
 
 			if (FlxG.keys.justPressed.R)
 			{
@@ -955,8 +962,6 @@ class ChartingState extends MusicBeatState
 			var daStrumTime = i[0];
 			var daSus = i[2];
 			var daStyle = i[3];
-
-			
 
 			var note:Note = new Note(daStrumTime, daNoteInfo % 4, null, false, true, daStyle);
 			note.sustainLength = daSus;

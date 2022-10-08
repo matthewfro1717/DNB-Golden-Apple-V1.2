@@ -140,7 +140,7 @@ class HealthIcon extends FlxSprite
 
 		antialiasing = true;
 
-		animation.play(char);
+		//animation.play(char);
 
 		if (noAaChars.contains(char))
 		{

@@ -43,8 +43,8 @@ class Note extends FlxSprite
 
 	private var InPlayState:Bool = false;
 
-	public static var CharactersWith3D:Array<String> = ["dave-angey", "bambi-3d", 'dave-annoyed-3d', 'dave-3d-standing-bruh-what', 'bambi-unfair', 'bambi-piss-3d', 'bandu', 'tunnel-dave', 'badai', 'unfair-junker', 'og-dave', 'split-dave-3d', 'garrett', 'og-dave-angey', '3d-bf', 'bandu-candy', 'bandu-scaredy', 'sart-producer', 'ringi', 'bambom', 'bendu', 'diamond-man', 'sart-producer-night', 'bandu-origin', 'RECOVERED_PROJECT', 'RECOVERED_PROJECT_2', 'RECOVERED_PROJECT_3', 'hall-monitor', 'playrobot', 'playrobot-crazy'];
-
+	public static var CharactersWith3D:Array<String> = ["dave-angey", "bambi-3d", 'dave-annoyed-3d', 'dave-3d-standing-bruh-what', 'bambi-unfair', 'bambi-piss-3d', 'bandu', 'tunnel-dave', 'badai', 'unfair-junker', 'og-dave', 'split-dave-3d', 'garrett', 'og-dave-angey', '3d-bf', 'bandu-candy', 'bandu-scaredy', 'sart-producer', 'ringi', 'bambom', 'bendu', 'diamond-man', 'sart-producer-night', 'bandu-origin', 'RECOVERED_PROJECT', 'RECOVERED_PROJECT_2', 'RECOVERED_PROJECT_3', 'hall-monitor', 'playrobot', 'playrobot-crazy', 'garrett-animal', 'playtime', 'palooseMen', 'garrett-ipad', 'wizard', 'piano-guy', 'pedophile', 'garrett-angry', 'garrett-car'];
+	public var noteStyle:String = 'normal';
 	public var rating:String = "shit";
 
 	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?musthit:Bool = true, noteStyle:String = "normal") //had to add a new variable to this because FNF dumb
@@ -70,35 +70,44 @@ class Note extends FlxSprite
 		var daStage:String = PlayState.curStage;
 		if (((CharactersWith3D.contains(PlayState.dadChar) && !musthit) || (CharactersWith3D.contains(PlayState.bfChar) && musthit)) || ((CharactersWith3D.contains(PlayState.SONG.player2) || CharactersWith3D.contains(PlayState.SONG.player1)) && ((this.strumTime / 50) % 20 > 10)))
 		{
-				frames = Paths.getSparrowAtlas('NOTE_assets_3D');
+			var daPath:String = 'NOTE_assets_3D';
+			switch (noteStyle) {
+				case 'magic':
+					daPath = 'funnyAnimal/magicNote';
+				case 'police':
+					daPath = 'funnyAnimal/palooseNote';
+				default:
+					daPath = 'NOTE_assets_3D';
+			}
+			frames = Paths.getSparrowAtlas(daPath);
 
-				animation.addByPrefix('greenScroll', 'green0');
-				animation.addByPrefix('redScroll', 'red0');
-				animation.addByPrefix('blueScroll', 'blue0');
-				animation.addByPrefix('purpleScroll', 'purple0');
+			animation.addByPrefix('greenScroll', 'green0');
+			animation.addByPrefix('redScroll', 'red0');
+			animation.addByPrefix('blueScroll', 'blue0');
+			animation.addByPrefix('purpleScroll', 'purple0');
 
-				animation.addByPrefix('purpleholdend', 'pruple end hold');
-				animation.addByPrefix('greenholdend', 'green hold end');
-				animation.addByPrefix('redholdend', 'red hold end');
-				animation.addByPrefix('blueholdend', 'blue hold end');
+			animation.addByPrefix('purpleholdend', 'pruple end hold');
+			animation.addByPrefix('greenholdend', 'green hold end');
+			animation.addByPrefix('redholdend', 'red hold end');
+			animation.addByPrefix('blueholdend', 'blue hold end');
 
-				animation.addByPrefix('purplehold', 'purple hold piece');
-				animation.addByPrefix('greenhold', 'green hold piece');
-				animation.addByPrefix('redhold', 'red hold piece');
-				animation.addByPrefix('bluehold', 'blue hold piece');
+			animation.addByPrefix('purplehold', 'purple hold piece');
+			animation.addByPrefix('greenhold', 'green hold piece');
+			animation.addByPrefix('redhold', 'red hold piece');
+			animation.addByPrefix('bluehold', 'blue hold piece');
 
-				setGraphicSize(Std.int(width * 0.7));
-				updateHitbox();
-				antialiasing = true;
+			setGraphicSize(Std.int(width * 0.7));
+			updateHitbox();
+			antialiasing = true;
 		}
 		else
 		{
 			switch (daStage)
 			{
 				default:
-				var dumbasspath:String = 'NOTE_assets';
+				    var dumbasspath:String = 'NOTE_assets';
 
-				    switch(noteStyle)
+				    switch (noteStyle)
 				    {
 						case 'phone':
 							dumbasspath = 'NOTE_phone';
@@ -130,6 +139,49 @@ class Note extends FlxSprite
 		
 		switch (PlayState.SONG.song.toLowerCase())
 		{
+			case 'ferocious':
+				switch (noteData)
+				{
+					case 0:
+						x += swagWidth * 0;
+						notetolookfor = 0;
+						if (noteStyle == 'police') {
+							animation.addByPrefix('siren', 'JUNKING', 24, true);
+							animation.play('siren');
+							angle = -90;
+						} else {
+							animation.play('purpleScroll');
+						}
+					case 1:
+						x += swagWidth * 1;
+						notetolookfor = 1;
+						if (noteStyle == 'police') {
+							animation.addByPrefix('siren', 'JUNKING', 24, true);
+							animation.play('siren');
+							flipY = true;
+						} else {
+							animation.play('blueScroll');
+						}
+					case 2:
+						notetolookfor = 2;
+						x += swagWidth * 2;
+						if (noteStyle == 'police') {
+							animation.addByPrefix('siren', 'JUNKING', 24, true);
+							animation.play('siren');
+						} else {
+							animation.play('greenScroll');
+						}
+					case 3:
+						notetolookfor = 3;
+						x += swagWidth * 3;
+						if (noteStyle == 'police') {
+							animation.addByPrefix('siren', 'JUNKING', 24, true);
+							animation.play('siren');
+							angle = 90;
+						} else {
+							animation.play('redScroll');
+						}
+				}
 			case 'cheating':
 				switch (noteData)
 				{

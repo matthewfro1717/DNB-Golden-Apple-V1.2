@@ -275,6 +275,22 @@ class PlayState extends MusicBeatState
 
 	var thunderBlack:FlxSprite;
 
+	var schoolSTATIC:FlxSprite;
+	var RUNBITCH:FlxSprite;
+	var RUNBITCHSTATIC:FlxSprite;
+	var BFLEGS2:FlxSprite;
+	var Jail:FlxSprite;
+	var blackScreenBG:FlxSprite;
+	var blackScreen:FlxSprite;
+	var IPADBG:FlxSprite;
+	var IPAD:FlxSprite;
+	var PEDOPHILESTATIC:FlxSprite;
+	var POLICECAR:FlxSprite;
+
+	var yoMAMA1:FlxTween;
+	var yoMAMA2:FlxTween;
+	var cameraOFFSET:Float = 0;
+
 	override public function create()
 	{
 		theFunne = FlxG.save.data.newInput;
@@ -422,7 +438,7 @@ class PlayState extends MusicBeatState
 			gf.visible = false;
 		}
 
-		if(SONG.song.toLowerCase() == 'algebra')
+		if (SONG.song.toLowerCase() == 'algebra' || SONG.song.toLowerCase() == 'ferocious')
 		{
 			gf.visible = false;
 		}
@@ -948,8 +964,71 @@ class PlayState extends MusicBeatState
 				}
 				
 			case 'ferocious':
-				//todo later since im very tired.
+				curStage = 'garrett-school';
+				defaultCamZoom = 0.6;
 
+				schoolSTATIC = new FlxSprite(-1670, -600).loadGraphic(Paths.image('funnyAnimal/schoolBG', 'shared'));
+				schoolSTATIC.scale.set(1.8, 1.8);
+				schoolSTATIC.updateHitbox();
+				sprites.add(schoolSTATIC);
+				add(schoolSTATIC);
+
+				RUNBITCH = new FlxSprite(-200, 100);
+				RUNBITCH.frames = Paths.getSparrowAtlas('funnyAnimal/runningThroughTheHalls', 'shared');
+				RUNBITCH.animation.addByPrefix('run', 'Symbol 2', 24, true);
+				RUNBITCH.animation.play('run');
+				RUNBITCH.scale.set(1.8, 1.8);
+				RUNBITCH.visible = false;
+				sprites.add(RUNBITCH);
+				add(RUNBITCH);
+
+				RUNBITCHSTATIC = new FlxSprite(-200, 100);
+				RUNBITCHSTATIC.frames = Paths.getSparrowAtlas('funnyAnimal/runningThroughTheHalls', 'shared');
+				RUNBITCHSTATIC.animation.addByPrefix('run', 'Symbol 2', 24, false);
+				RUNBITCHSTATIC.animation.play('run');
+				RUNBITCHSTATIC.scale.set(1.8, 1.8);
+				RUNBITCHSTATIC.visible = false;
+				sprites.add(RUNBITCHSTATIC);
+				add(RUNBITCHSTATIC);
+
+				BFLEGS2 = new FlxSprite(-500, 700);
+				BFLEGS2.frames = Paths.getSparrowAtlas('funnyAnimal/legs_working', 'shared');
+				BFLEGS2.scale.set(0.7, 0.7);
+				BFLEGS2.visible = false;
+				BFLEGS2.flipX = true;
+				BFLEGS2.animation.addByPrefix('LEGS', 'poop attack0', 24, true);
+				BFLEGS2.animation.addByPrefix('e', 'legs0', 24, true);
+				BFLEGS2.animation.play('e', true);
+				sprites.add(BFLEGS2);
+				add(BFLEGS2);
+
+				blackScreenBG = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+				blackScreenBG.scale.set(5, 5);
+				blackScreenBG.visible = false;
+				sprites.add(blackScreenBG);
+				add(blackScreenBG);
+
+				blackScreen = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+				blackScreen.cameras = [camHUD];
+				blackScreen.scale.set(5, 5);
+				blackScreen.visible = false;
+				sprites.add(blackScreen);
+				add(blackScreen);
+
+				Jail = new FlxSprite(0, 0).loadGraphic(Paths.image('funnyAnimal/jailCell', 'shared'));
+				Jail.scale.set(1.8, 1.8);
+				Jail.visible = false;
+				Jail.screenCenter();
+				Jail.updateHitbox();
+				sprites.add(Jail);
+				add(Jail);
+
+				IPADBG = new FlxSprite(FlxG.width -1800, FlxG.height -1150).loadGraphic(Paths.image('funnyAnimal/futurePadBG', 'shared'));
+				IPADBG.visible = false;
+				IPADBG.scale.set(2, 2);
+				IPADBG.updateHitbox();
+				sprites.add(IPADBG);
+				add(IPADBG);
 			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness' | 'disruption' | 'disability' | 'origin' | 'metallic' | 'strawberry' | 'keyboard':
 				defaultCamZoom = 0.9;
 				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
@@ -2715,10 +2794,16 @@ class PlayState extends MusicBeatState
 					else
 					{
 						if(daNote.mustPress && daNote.finishedGenerating)
-							noteMiss(daNote.noteData);
-							health -= 0.075;
-							//trace("miss note");
-							vocals.volume = 0;
+						    if (daNote.noteStyle == 'police') {
+							    //trace('No miss for the police note lol');
+					       	} else if (daNote.noteStyle == 'magic') {
+							    //trace('No miss for the magic note lol');
+						    } else {
+								noteMiss(daNote.noteData);
+								health -= 0.075;
+								//trace("miss note");
+								vocals.volume = 0;
+							}
 					}
 
 					daNote.active = false;
@@ -2827,6 +2912,18 @@ class PlayState extends MusicBeatState
 			case 'playrobot-crazy':
 				camFollow.x -= 160;
 				camFollow.y -= 10;
+			case 'playtime':
+				camFollow.x = dad.getMidpoint().x -300;
+				camFollow.y = dad.getMidpoint().y -300;
+			case 'bf-ipad':
+				camFollow.x = dad.getMidpoint().x +700;
+				camFollow.y = dad.getMidpoint().y -150;
+			case 'garrett-ipad':
+				camFollow.x = dad.getMidpoint().x +700;
+				camFollow.y = dad.getMidpoint().y -150;
+			case 'pedophile':
+				camFollow.x = dad.getMidpoint().x +50;
+				camFollow.y = dad.getMidpoint().y -100;
 		}
 	}
 
@@ -3453,10 +3550,36 @@ class PlayState extends MusicBeatState
 			else
 				totalNotesHit += 1;
 
-			if (note.isSustainNote)
-				health += 0.004;
-			else
-				health += 0.023;
+			if (note.noteStyle == 'police') {
+				if (!FlxG.save.data.downscroll)			
+					ArrowShits(0, 10, false);
+				else
+					ArrowShits(0, -10, false);
+			} else if (note.noteStyle == 'magic') {
+				var Shit1:Float = FlxG.random.int(-140, 140);
+				var Shit2:Float = FlxG.random.int(-140, 140);
+
+				if (Shit1 < 0) {
+					camGame.angle -= Shit1;
+				}
+				else {
+					camGame.angle += Shit1;
+				}
+
+				if (Shit2 < 0) {
+					camHUD.angle -= Shit2;
+				}
+				else {
+					camHUD.angle += Shit2;
+				}
+				FlxTween.tween(camGame, {angle: 0}, 4);
+				FlxTween.tween(camHUD, {angle: 0}, 4);
+			} else {
+				if (note.isSustainNote)
+					health += 0.004;
+				else
+					health += 0.023;
+			}
 
 			if (darkLevels.contains(curStage) && SONG.song.toLowerCase() != "polygonized")
 			{
@@ -3516,6 +3639,152 @@ class PlayState extends MusicBeatState
 		}
 	}
 
+	function ArrowShits(X:Dynamic, Y:Dynamic, Subtracting:Bool) {
+		if (Subtracting) {
+			strumLine.x -= X;
+			strumLine.y -= Y;
+
+			if (FlxG.save.data.downscroll) {
+				cameraOFFSET -= Y;
+			}
+			//cameraOFFSET -= Y;
+
+
+			playerStrums.forEach(function(spr:FlxSprite) {
+				switch (spr.ID)
+				{
+					case 0:
+						spr.x -= strumLine.x;
+						spr.y = strumLine.y;
+					case 1:
+						spr.x -= strumLine.x;
+						spr.y = strumLine.y;
+					case 2:
+						spr.x -= strumLine.x;
+						spr.y = strumLine.y;
+					case 3:
+						spr.x -= strumLine.x;
+						spr.y = strumLine.y;
+				}
+			});
+
+			dadStrums.forEach(function(spr:FlxSprite) {
+				switch (spr.ID)
+				{
+					case 0:
+						spr.x -= strumLine.x;
+						spr.y = strumLine.y;
+					case 1:
+						spr.x -= strumLine.x;
+						spr.y = strumLine.y;
+					case 2:
+						spr.x -= strumLine.x;
+						spr.y = strumLine.y;
+					case 3:
+						spr.x -= strumLine.x;
+						spr.y = strumLine.y;
+				}
+			});
+		} else {
+			strumLine.x += X;
+			strumLine.y += Y;
+			cameraOFFSET += Y;
+
+			playerStrums.forEach(function(spr:FlxSprite) {
+				switch (spr.ID)
+				{
+					case 0:
+						spr.x += strumLine.x;
+						spr.y = strumLine.y;
+					case 1:
+						spr.x += strumLine.x;
+						spr.y = strumLine.y;
+					case 2:
+						spr.x += strumLine.x;
+						spr.y = strumLine.y;
+					case 3:
+						spr.x += strumLine.x;
+						spr.y = strumLine.y;
+				}
+			});
+
+			dadStrums.forEach(function(spr:FlxSprite) {
+				switch (spr.ID)
+				{
+					case 0:
+						spr.x += strumLine.x;
+						spr.y = strumLine.y;
+					case 1:
+						spr.x += strumLine.x;
+						spr.y = strumLine.y;
+					case 2:
+						spr.x += strumLine.x;
+						spr.y = strumLine.y;
+					case 3:
+						spr.x += strumLine.x;
+						spr.y = strumLine.y;
+				}
+			});
+		}
+	}
+
+	function ReloadHealthBarColors() {
+		healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
+	}
+
+	function ReloadIcons(?Icon1:String = "", ?Icon2:String = "") {
+		if (Icon1 == "") {
+			Icon1 = boyfriend.curCharacter;
+		}
+		remove(iconP1);
+		iconP1 = new HealthIcon(Icon1, true);
+		iconP1.y = healthBar.y - (iconP1.height / 2);
+		add(iconP1);
+		iconP1.cameras = [camHUD];
+	
+		if (Icon2 == "") {
+			Icon2 = dad.curCharacter;
+		}
+		remove(iconP2);
+		iconP2 = new HealthIcon(Icon2, false);
+		iconP2.y = healthBar.y - (iconP2.height / 2);
+		add(iconP2);
+		iconP2.cameras = [camHUD];
+	}
+
+	function PlayANIMATION(Player:Int, AnimName:Dynamic) {
+		if (Player == 3){
+			gf.playAnim(AnimName, true);
+		} else if (Player == 2) {
+			dad.playAnim(AnimName, true);
+		} else if (Player == 1) {
+			boyfriend.playAnim(AnimName, true);
+		}
+	}
+
+	function ChangeCHAR(Player:Int, X:Dynamic, Y:Dynamic, NewCHAR:Dynamic, ?HideFlash:Bool = false) {
+		if (Player == 3){
+			gf.alpha = 0.0000001;
+			remove(gf);
+			gf = new Character(X, Y, NewCHAR);
+			add(gf);
+		} else if (Player == 2) {
+			dad.alpha = 0.0000001;
+			remove(dad);
+			dad = new Character(X, Y, NewCHAR);
+			add(dad);
+		} else if (Player == 1) {
+			boyfriend.alpha = 0.0000001;
+			remove(boyfriend);
+			boyfriend = new Boyfriend(X, Y, NewCHAR);
+			add(boyfriend);
+		}
+		ReloadIcons();
+		if (!HideFlash) {
+			FlxG.camera.flash(FlxColor.WHITE, 0.35, null, true);
+		}
+	}
+
 	override function stepHit()
 	{
 		super.stepHit();
@@ -3536,6 +3805,206 @@ class PlayState extends MusicBeatState
 			FlxG.sound.music.length
 			- Conductor.songPosition);
 		#end
+
+	    if (SONG.song.toLowerCase() == 'ferocious') {
+			if (curStep == 12) {
+				trace('THIS IS FOR TESTING LOL');
+			}
+
+			if (curStep == 1152) {
+				ChangeCHAR(2, -110, 220, 'playtime');
+				PlayANIMATION(2, 'garrett pulls out ass');
+				trace('garret summoned playtime out of ass');
+			}
+
+			if (curStep == 2159) {
+				RUNBITCH.visible = true;
+				BFLEGS2.visible = true;
+				defaultCamZoom = 0.75;
+				ChangeCHAR(2, 840, 840, 'palooseMen');
+				ChangeCHAR(1, -230, 625, '3d-bf-flipped');
+
+				trace('POLICE IS ON YOUR ASS RUN BITCH');
+			}
+
+			if (curStep == 3215) {
+				defaultCamZoom = 0.7;
+				RUNBITCH.visible = false;
+				BFLEGS2.visible = false;
+				Jail.visible = true;
+
+				var whereTonowlol:Float = dad.x +3800;
+
+				ChangeCHAR(2, 680, 620, 'palooseMen');
+				ChangeCHAR(1, 1340, 1020, '3d-bf');
+
+				FlxTween.tween(dad, {x: whereTonowlol}, 6.5, {
+					startDelay: 1.45, 
+					onComplete: function(twn:FlxTween) 
+					{
+						//dad.visible = false;
+						//this broke it lol
+					}
+				});
+			}
+
+			if (curStep == 3311) {
+				defaultCamZoom = 0.5;
+				blackScreenBG.visible = true;
+				Jail.visible = false;
+
+				if (!FlxG.save.data.downscroll)
+					ArrowShits(0, cameraOFFSET, true);
+				else
+					ArrowShits(0, cameraOFFSET, false);
+
+				IPADBG.visible = true;
+
+				ChangeCHAR(2, -180, 300, 'garrett-ipad');
+				ChangeCHAR(1, 200, -150, 'bf-ipad');
+
+				IPAD = new FlxSprite(FlxG.width -1800, FlxG.height -1150).loadGraphic(Paths.image('funnyAnimal/futurePad', 'shared'));
+				IPAD.scale.set(2, 2);
+				IPAD.updateHitbox();
+				add(IPAD);
+				trace('GARRETT IS PISSED LOL');
+			}
+
+			if (curStep == 4719) {
+				defaultCamZoom = 0.8;
+				blackScreenBG.visible = false;
+				IPADBG.visible = false;
+				IPAD.visible = false;
+				RUNBITCHSTATIC.visible = true;
+				ChangeCHAR(2, -370, 240, 'wizard');
+				ChangeCHAR(1, 770, 875, '3d-bf');
+				trace('wizard!!!');
+			}
+
+			if (curStep == 5903) {
+				RUNBITCHSTATIC.visible = false;
+				RUNBITCH.visible = true;
+				var offsets:Float = boyfriend.x -580;
+				ChangeCHAR(2, offsets, 500, 'piano-guy');
+				ChangeCHAR(1, 770, 900, '3d-bf-flipped');
+				trace('piano guy?');
+			}
+
+			if (curStep == 7719) {
+				RUNBITCHSTATIC.visible = true;
+				RUNBITCH.visible = false;
+
+				var whereTonowlol:Float = dad.x -3800;
+				var offsets:Float = boyfriend.x +700;
+				FlxTween.tween(dad, {x: whereTonowlol}, 1.3, {
+					onComplete: function(twn:FlxTween) 
+					{
+						ChangeCHAR(2, offsets, 320, 'pedophile', true);
+						trace('OH NO ITS A PEDOPHILE RUN BITCH');
+					}
+				});
+			}
+
+			if (curStep == 8703) {
+				PEDOPHILESTATIC = new FlxSprite(dad.x -300, dad.y);
+				PEDOPHILESTATIC.frames = Paths.getSparrowAtlas('funnyAnimal/zunkity', 'shared');
+				PEDOPHILESTATIC.animation.addByPrefix('hey its the toddler', 'FAKE LOADING SCREEN0000', 24, false);
+				PEDOPHILESTATIC.animation.addByPrefix('hhmm', 'FAKE LOADING SCREEN0001', 24, false);
+				PEDOPHILESTATIC.animation.addByPrefix('smile', 'FAKE LOADING SCREEN0002', 24, false);
+				PEDOPHILESTATIC.animation.addByPrefix('im smile at you', 'FAKE LOADING SCREEN0003', 24, false);
+				PEDOPHILESTATIC.animation.addByPrefix('you ugly', 'FAKE LOADING SCREEN0004', 24, false);
+				PEDOPHILESTATIC.animation.addByPrefix('did you get uglier', 'FAKE LOADING SCREEN0005', 24, false);
+				PEDOPHILESTATIC.animation.addByPrefix('garrett is ugly', 'FAKE LOADING SCREEN0006', 24, false);
+				PEDOPHILESTATIC.animation.addByPrefix('bf is ugly', 'FAKE LOADING SCREEN0007', 24, false);
+				PEDOPHILESTATIC.animation.addByPrefix('like my cut', 'FAKE LOADING SCREEN0008', 24, false);
+				PEDOPHILESTATIC.animation.addByPrefix('i wear a mask with a smile', 'FAKE LOADING SCREEN0009', 24, false);
+				PEDOPHILESTATIC.animation.addByPrefix('wtf', 'FAKE LOADING SCREEN0010', 24, false);
+				PEDOPHILESTATIC.animation.addByPrefix('THERE IS A CAR COMING RUN BITCH', 'FAKE LOADING SCREEN0011', 24, false);
+				PEDOPHILESTATIC.visible = false;
+				add(PEDOPHILESTATIC);
+
+				ChangeCHAR(2, -370, 420, 'garrett-angry');
+				ChangeCHAR(1, 770, 875, '3d-bf');
+
+				PEDOPHILESTATIC.animation.play('hey its the toddler');
+				PEDOPHILESTATIC.visible = true;
+			}
+
+			if (curStep == 8927) {
+				PEDOPHILESTATIC.animation.play('hhmm');
+			}
+
+			if (curStep == 9119) {
+				PEDOPHILESTATIC.animation.play('smile');
+			}
+
+			if (curStep == 9279) {
+				PEDOPHILESTATIC.animation.play('im smile at you');
+			}
+
+			if (curStep == 9347) {
+				PEDOPHILESTATIC.animation.play('you ugly');
+			}
+
+			if (curStep == 9420) {
+				PEDOPHILESTATIC.animation.play('did you get uglier');
+			}
+
+			if (curStep == 9503) {
+				PEDOPHILESTATIC.animation.play('garrett is ugly');
+			}
+
+			if (curStep == 9759) {
+				PEDOPHILESTATIC.animation.play('bf is ugly');
+			}
+
+			if (curStep == 10015) {
+				PEDOPHILESTATIC.animation.play('like my cut');
+			}
+
+			if (curStep == 10271) {
+				PEDOPHILESTATIC.animation.play('i wear a mask with a smile');
+			}
+
+			if (curStep == 10527) {
+				PEDOPHILESTATIC.animation.play('wtf');
+			}
+
+			if (curStep == 10863) {
+				PEDOPHILESTATIC.animation.play('THERE IS A CAR COMING RUN BITCH');
+			}
+			
+			if (curStep == 11035) {
+				PEDOPHILESTATIC.visible = false;
+				blackScreen.visible = true;
+				RUNBITCHSTATIC.visible = false;
+				RUNBITCH.visible = true;
+				RUNBITCH.flipX = true;
+				BFLEGS2.visible = true;
+				BFLEGS2.flipX = false;
+				BFLEGS2.x += 1420;
+				ChangeCHAR(1, 1130, 625, '3d-bf');
+				ChangeCHAR(2, -230, 425, 'garrett-car');
+
+				POLICECAR = new FlxSprite(dad.x, dad.y);
+				POLICECAR.frames = Paths.getSparrowAtlas('funnyAnimal/palooseCar', 'shared');
+				POLICECAR.animation.addByPrefix('run', 'idle0', 24, true);
+				POLICECAR.animation.play('run');
+				add(POLICECAR);
+
+				new FlxTimer().start(0.2, function(tmr:FlxTimer) {
+					blackScreen.visible = false;
+				});
+			}
+
+			if (curStep == 11295) {
+				defaultCamZoom = 1.2;
+			}
+
+			if (curStep == 11423) {
+				defaultCamZoom = 0.8;
+			}
+		}
 	}
 
 	var lightningStrikeBeat:Int = 0;
@@ -4164,6 +4633,9 @@ class PlayState extends MusicBeatState
 			case 'playrobot-crazy':
 				dad.y += 365;
 				dad.x += 165;
+			case 'garrett-animal':
+				dad.x -= 430;
+				dad.y -= 20;
 		}
 	}
 	
