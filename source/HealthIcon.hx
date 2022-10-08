@@ -11,7 +11,6 @@ class HealthIcon extends FlxSprite
 	public var sprTracker:FlxSprite;
 
 	public var isPlayer:Bool = false;
-
 	
 	public var noAaChars:Array<String> = [
 		'dave-angey',
