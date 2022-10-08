@@ -739,12 +739,6 @@ class PlayState extends MusicBeatState
 
 		switch (curSong.toLowerCase())
 		{
-			case 'splitathon':
-				preload('splitathon/Bambi_WaitWhatNow');
-				preload('splitathon/Bambi_ChillingWithTheCorn');
-			case 'insanity':
-				preload('dave/redsky');
-				preload('dave/redsky_insanity');
 			case 'wireframe':
 				preload('bambi/badai');
 			case 'algebra':

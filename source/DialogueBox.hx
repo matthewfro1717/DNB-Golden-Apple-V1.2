@@ -60,11 +60,20 @@ class DialogueBox extends FlxSpriteGroup
 		if (FlxG.save.data.freeplayCuts) {
 			switch (PlayState.SONG.song.toLowerCase())
 			{
-				case 'disability' | 'applecore' | 'algebra':
+				case 'algebra':
 					FlxG.sound.playMusic(Paths.music('DaveDialogue'), 0);
 					FlxG.sound.music.fadeIn(1, 0, 0.8);
 				case 'disruption':
-					FlxG.sound.playMusic(Paths.music('scaryAmbience'), 0);
+					FlxG.sound.playMusic(Paths.music('disruptionCutscene'), 0);
+					FlxG.sound.music.fadeIn(1, 0, 0.8);
+				case 'applecore':
+					FlxG.sound.playMusic(Paths.music('applecoreCutscene'), 0);
+					FlxG.sound.music.fadeIn(1, 0, 0.8);
+				case 'wireframe':
+					FlxG.sound.playMusic(Paths.music('wireframeCutscene'), 0);
+					FlxG.sound.music.fadeIn(1, 0, 0.8);
+				case 'disability':
+					FlxG.sound.playMusic(Paths.music('disabilityDialogue'), 0);
 					FlxG.sound.music.fadeIn(1, 0, 0.8);
 			}
 		}
@@ -77,11 +86,11 @@ class DialogueBox extends FlxSpriteGroup
 		if(PlayState.SONG.song.toLowerCase()=='senpai' || PlayState.SONG.song.toLowerCase()=='roses' || PlayState.SONG.song.toLowerCase()=='thorns')
 		{
 			new FlxTimer().start(0.83, function(tmr:FlxTimer)
-				{
-					bgFade.alpha += (1 / 5) * 0.7;
-					if (bgFade.alpha > 0.7)
-						bgFade.alpha = 0.7;
-				}, 5);
+			{
+				bgFade.alpha += (1 / 5) * 0.7;
+				if (bgFade.alpha > 0.7)
+					bgFade.alpha = 0.7;
+			}, 5);
 		}
 		else
 		{
