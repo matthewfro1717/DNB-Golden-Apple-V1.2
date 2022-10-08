@@ -2772,7 +2772,7 @@ class PlayState extends MusicBeatState
 					}
 					else
 					{
-						if(daNote.mustPress) {
+						if(daNote.mustPress && daNote.finishedGenerating) {
 						    if (daNote.noteStyle == 'police') {
 							    //trace('No miss for the police note lol');
 					       	} else if (daNote.noteStyle == 'magic') {
