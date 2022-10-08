@@ -97,9 +97,6 @@ class PlayState extends MusicBeatState
 	public var darkLevels:Array<String> = ['bambiFarmNight', 'daveHouse_night', 'unfairness', 'disabled'];
 	public var sunsetLevels:Array<String> = ['bambiFarmSunset', 'daveHouse_Sunset'];
 
-	var howManyPlayerNotes:Int = 0;
-	var howManyEnemyNotes:Int = 0;
-
 	public var stupidx:Float = 0;
 	public var stupidy:Float = 0; // stupid velocities for cutscene
 	public var updatevels:Bool = false;
@@ -147,10 +144,6 @@ class PlayState extends MusicBeatState
 	private var littleIdiot:Character;
 
 	private var altSong:SwagSong;
-
-	private var daveExpressionSplitathon:Character;
-
-	//dad.curCharacter == 'bambi-unfair' || dad.curCharacter == 'bambi-3d' || dad.curCharacter == 'bambi-piss-3d'
 
 	public static var shakingChars:Array<String> = ['bambi-unfair', 'bambi-3d', 'bambi-piss-3d', 'badai', 'unfair-junker', 'tunnel-dave'];
 
@@ -735,7 +728,7 @@ class PlayState extends MusicBeatState
 		kadeEngineWatermark.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
 		kadeEngineWatermark.borderSize = 1.25;
-		add(kadeEngineWatermark);
+		// add(kadeEngineWatermark);
 
 		creditsWatermark = new FlxText(4, healthBarBG.y + 50, 0, credits, 16);
 		creditsWatermark.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
