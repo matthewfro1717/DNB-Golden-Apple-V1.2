@@ -1,4 +1,5 @@
 package;
+
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -82,7 +83,7 @@ class CharacterSelectState extends MusicBeatState
 	override public function create():Void 
 	{
 		super.create();
-		Conductor.changeBPM(110);
+		Conductor.changeBPM(100);
 		if(PlayState.SONG.song.toLowerCase() == 'dave-x-bambi-shipping-cute')
 		{
 			characters = [new CharacterInSelect(['dave-good','split-dave-3d', 'tunnel-dave', 'og-dave', 'og-dave-angey'], ['Dave (Dave x Bambi)', 'Disability Dave', 'Wireframe Dave', 'Algebra Dave', 'Algebra Dave (Angry)'])];
@@ -92,9 +93,9 @@ class CharacterSelectState extends MusicBeatState
 		FlxG.save.data.unlockedcharacters = [true,true,true,true,true,true,true,true]; //unlock everyone hi
 
 		var end:FlxSprite = new FlxSprite(0, 0);
-		FlxG.sound.playMusic(Paths.music("goodEnding"),1,true);
+		FlxG.sound.playMusic(Paths.music("character_select", "preload"),1,true);
 		add(end);
-		
+
 		//create stage
 		var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stageback'));
 		bg.antialiasing = true;

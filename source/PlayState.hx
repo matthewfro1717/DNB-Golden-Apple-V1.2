@@ -593,11 +593,6 @@ class PlayState extends MusicBeatState
 		dadChar = dad.curCharacter;
 		bfChar = boyfriend.curCharacter;
 
-		/*if(bfChar == '3d-bf')
-		{
-			boyfriend.y += 75;
-		}*/
-
 		if (SONG.song.toLowerCase() == 'dave-x-bambi-shipping-cute') gf.visible = false;
 		if (curStage == 'house') gf.visible = false;
 
@@ -705,15 +700,7 @@ class PlayState extends MusicBeatState
 		var credits:String;
 		switch (SONG.song.toLowerCase())
 		{
-			case 'supernovae':
-				credits = 'Original Song made by ArchWk!';
-			case 'glitch':
-				credits = 'Original Song made by DeadShadow and PixelGH!';
-			case 'mealie':
-				credits = 'Original Song made by Alexander Cooper 19!';
-			case 'unfairness':
-				credits = "Ghost tapping is forced off! Screw you!";
-			case 'cheating' | 'disruption':
+			case 'disruption':
 				credits = 'Screw you!';
 			case 'thunderstorm':
 				credits = 'Original song made by Saruky for Vs. Shaggy!';
@@ -816,11 +803,6 @@ class PlayState extends MusicBeatState
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 
-		// if (SONG.song == 'South')
-		// FlxG.camera.alpha = 0.7;
-		// UI_camera.zoom = 1;
-
-		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 
 		if (isStoryMode || FlxG.save.data.freeplayCuts)
@@ -3102,14 +3084,6 @@ class PlayState extends MusicBeatState
 		{
 			songScore += score;
 
-			/* if (combo > 60)
-					daRating = 'sick';
-				else if (combo > 12)
-					daRating = 'good'
-				else if (combo > 4)
-					daRating = 'bad';
-			*/
-
 			if(scoreTxtTween != null) 
 			{
 				scoreTxtTween.cancel();
@@ -3619,11 +3593,6 @@ class PlayState extends MusicBeatState
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
 		{
 			resyncVocals();
-		}
-
-		if (dad.curCharacter == 'spooky' && curStep % 4 == 2)
-		{
-			// dad.dance();
 		}
 
 		#if desktop

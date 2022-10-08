@@ -60,42 +60,12 @@ class DialogueBox extends FlxSpriteGroup
 		if (FlxG.save.data.freeplayCuts) {
 			switch (PlayState.SONG.song.toLowerCase())
 			{
-				case 'senpai':
-					FlxG.sound.playMusic(Paths.music('Lunchbox'), 0);
-					FlxG.sound.music.fadeIn(1, 0, 0.8);
-				case 'thorns':
-					FlxG.sound.playMusic(Paths.music('LunchboxScary'), 0);
-					FlxG.sound.music.fadeIn(1, 0, 0.8);
-				case 'house' | 'insanity' | 'splitathon' | 'disability' | 'applecore' | 'algebra':
+				case 'disability' | 'applecore' | 'algebra':
 					FlxG.sound.playMusic(Paths.music('DaveDialogue'), 0);
 					FlxG.sound.music.fadeIn(1, 0, 0.8);
-				case 'furiosity' | 'polygonized' | 'cheating' | 'unfairness' | 'disruption' | 'wireframe':
+				case 'disruption':
 					FlxG.sound.playMusic(Paths.music('scaryAmbience'), 0);
 					FlxG.sound.music.fadeIn(1, 0, 0.8);
-				case 'supernovae' | 'glitch':
-					randomNumber = FlxG.random.int(0, 50);
-					if(randomNumber == 50)
-					{
-						FlxG.sound.playMusic(Paths.music('secret'), 0);
-						FlxG.sound.music.fadeIn(1, 0, 0.8);
-					}
-					else
-					{
-						FlxG.sound.playMusic(Paths.music('dooDooFeces'), 0);
-						FlxG.sound.music.fadeIn(1, 0, 0.8);
-					}
-				case 'blocked' | 'corn-theft' | 'maze':
-					randomNumber = FlxG.random.int(0, 50);
-					if(randomNumber == 50)
-					{
-						FlxG.sound.playMusic(Paths.music('secret'), 0);
-						FlxG.sound.music.fadeIn(1, 0, 0.8);
-					}
-					else
-					{
-						FlxG.sound.playMusic(Paths.music('DaveDialogue'), 0);
-						FlxG.sound.music.fadeIn(1, 0, 0.8);
-					}
 			}
 		}
 
@@ -119,8 +89,6 @@ class DialogueBox extends FlxSpriteGroup
 		}
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'senpai' | 'roses' | 'thorns':
-				box = new FlxSprite(-20, 45);
 			default:
 				box = new FlxSprite(-20, 400);
 		}
@@ -133,29 +101,7 @@ class DialogueBox extends FlxSpriteGroup
 		var hasDialog = false;
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'senpai':
-				hasDialog = false;
-				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-pixel');
-				box.animation.addByPrefix('normalOpen', 'Text Box Appear', 24, false);
-				box.animation.addByIndices('normal', 'Text Box Appear', [4], "", 24);
-			case 'roses':
-				hasDialog = false;
-				FlxG.sound.play(Paths.sound('ANGRY_TEXT_BOX'));
-
-				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-senpaiMad');
-				box.animation.addByPrefix('normalOpen', 'SENPAI ANGRY IMPACT SPEECH', 24, false);
-				box.animation.addByIndices('normal', 'SENPAI ANGRY IMPACT SPEECH', [4], "", 24);
-
-			case 'thorns':
-				hasDialog = false;
-				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil');
-				box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
-				box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
-				
-				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward', 'week6'));
-				face.setGraphicSize(Std.int(face.width * 6));
-				add(face);
-			case 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'supernovae' | 'cheating' | 'unfairness' | 'glitch' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon' | 'disruption' | 'applecore' | 'disability' | 'wireframe' | 'algebra':
+			case 'disruption' | 'applecore' | 'disability' | 'wireframe' | 'algebra':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
 				box.setGraphicSize(Std.int(box.width / textBoxSizeFix));
@@ -177,13 +123,8 @@ class DialogueBox extends FlxSpriteGroup
 
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'senpai' | 'roses' | 'thorns':
-				portraitLeftCharacter = 'senpai';
-				portraitRightCharacter = 'bfPixel';
-				
-			case 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'disability' | 'algebra' | 'wireframe':
+			case 'disability' | 'algebra' | 'wireframe':
 				portraitLeftCharacter = 'dave';
-				
 			case 'blocked' | 'corn-theft' | 'maze' | 'supernovae' | 'glitch' | 'splitathon' | 'cheating' | 'unfairness' | 'disruption' | 'applecore':
 				portraitLeftCharacter = 'bambi';
 		}
@@ -206,16 +147,6 @@ class DialogueBox extends FlxSpriteGroup
 
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'senpai' | 'roses' | 'thorns':
-				portraitLeft.setPosition(-20, 70);
-				portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.9));
-				portraitRight.antialiasing = false;
-				portraitLeft.visible = false;
-
-				portraitRight.setPosition(320, 200);
-				portraitRight.visible = true;
-				portraitLeft.antialiasing = false;
-
 			default:
 				portraitLeft.setPosition(276.95, 170);
 				portraitLeft.visible = true;
@@ -233,12 +164,7 @@ class DialogueBox extends FlxSpriteGroup
 
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'senpai' | 'roses' | 'thorns':
-				handSelect = new FlxSprite(FlxG.width * 0.9, FlxG.height * 0.9).loadGraphic(Paths.image('weeb/pixelUI/hand_textbox'));
-				handSelect.setGraphicSize(Std.int(handSelect.width * 6));
-				handSelect.updateHitbox();
-				add(handSelect);
-			case 'furiosity' | 'polygonized' | 'cheating' | 'unfairness' | 'disruption' | 'applecore' | 'disability' | 'wireframe' | 'algebra':
+			case 'disruption' | 'applecore' | 'disability' | 'wireframe' | 'algebra':
 				dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
 				dropText.font = 'Comic Sans MS Bold';
 				dropText.color = 0xFFFFFFFF;
@@ -308,8 +234,6 @@ class DialogueBox extends FlxSpriteGroup
 			
 			switch (PlayState.SONG.song.toLowerCase())
 			{
-				case 'senpai' | 'thorns' | 'roses':
-					FlxG.sound.play(Paths.sound('clickText'), 0.8);
 				default:
 					FlxG.sound.play(Paths.sound('textclickmodern'), 0.8);
 			}
@@ -324,23 +248,13 @@ class DialogueBox extends FlxSpriteGroup
 
 					switch (PlayState.SONG.song.toLowerCase())
 					{
-						case 'senpai' | 'thorns' | 'roses':
-							new FlxTimer().start(0.2, function(tmr:FlxTimer)
-								{
-									box.alpha -= 1 / 5;
-									bgFade.alpha -= 1 / 5 * 0.7;
-									portraitLeft.visible = false;
-									portraitRight.visible = false;
-									swagDialogue.alpha -= 1 / 5;
-									dropText.alpha = swagDialogue.alpha;
-								},5);
-							default:
-								FlxTween.tween(box, {alpha: 0}, 1.2);
-								FlxTween.tween(bgFade, {alpha: 0}, 1.2);
-								FlxTween.tween(portraitLeft, {alpha: 0}, 1.2);
-								FlxTween.tween(portraitRight, {alpha: 0}, 1.2);
-								FlxTween.tween(swagDialogue, {alpha: 0}, 1.2);
-								FlxTween.tween(dropText, {alpha: 0}, 1.2);
+						default:
+							FlxTween.tween(box, {alpha: 0}, 1.2);
+							FlxTween.tween(bgFade, {alpha: 0}, 1.2);
+							FlxTween.tween(portraitLeft, {alpha: 0}, 1.2);
+							FlxTween.tween(portraitRight, {alpha: 0}, 1.2);
+							FlxTween.tween(swagDialogue, {alpha: 0}, 1.2);
+							FlxTween.tween(dropText, {alpha: 0}, 1.2);
 					}
 
 					new FlxTimer().start(1.2, function(tmr:FlxTimer)
@@ -403,7 +317,7 @@ class DialogueBox extends FlxSpriteGroup
 			switch (curCharacter)
 			{
 				case 'dave' | 'bambi' | 'tristan' | 'insanityEndDave': //guys its the funny bambi character
-						portraitLeft.setPosition(220, 220);
+					portraitLeft.setPosition(220, 220);
 				case 'bf' | 'gf': //create boyfriend & genderbent boyfriend
 					portraitRight.setPosition(570, 220);
 			}
