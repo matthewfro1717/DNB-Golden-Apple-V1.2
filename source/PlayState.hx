@@ -2772,7 +2772,7 @@ class PlayState extends MusicBeatState
 					}
 					else
 					{
-						if(daNote.mustPress && daNote.finishedGenerating)
+						if(daNote.mustPress) {
 						    if (daNote.noteStyle == 'police') {
 							    //trace('No miss for the police note lol');
 					       	} else if (daNote.noteStyle == 'magic') {
@@ -2783,6 +2783,7 @@ class PlayState extends MusicBeatState
 								//trace("miss note");
 								vocals.volume = 0;
 							}
+						}
 					}
 
 					daNote.active = false;
