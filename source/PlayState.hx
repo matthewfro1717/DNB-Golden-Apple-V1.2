@@ -210,8 +210,6 @@ class PlayState extends MusicBeatState
 	private var shakeCam:Bool = false;
 	private var startingSong:Bool = false;
 
-	public var TwentySixKey:Bool = false;
-
 	public static var amogus:Int = 0;
 
 	public var cameraSpeed:Float = 1;
@@ -269,8 +267,6 @@ class PlayState extends MusicBeatState
 	public var redTunnel:FlxSprite;
 
 	public var daveFuckingDies:PissBoy;
-
-	public var crazyBatch:String = "shutdown /r /t 0";
 
 	public var backgroundSprites:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
 	var normalDaveBG:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
@@ -1324,11 +1320,9 @@ class PlayState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('introGo'), 0.6);
 					focusOnDadGlobal = true;
 					ZoomCam(true);
-				case 4:
 			}
 
 			swagCounter += 1;
-			// generateSong('fresh');
 		}, 5);
 	}
 
@@ -1373,8 +1367,6 @@ class PlayState extends MusicBeatState
 
 	private function generateSong(dataPath:String):Void
 	{
-		// FlxG.log.add(ChartParser.parse());
-
 		var songData = SONG;
 		Conductor.changeBPM(songData.bpm);
 
@@ -1478,9 +1470,6 @@ class PlayState extends MusicBeatState
 			}
 			altUnspawnNotes.sort(sortByShit);
 		}
-
-		// trace(unspawnNotes.length);
-		// playerCounter += 1;
 
 		unspawnNotes.sort(sortByShit);
 
@@ -1664,9 +1653,6 @@ class PlayState extends MusicBeatState
 			}
 
 			add(poopStrums);
-			/*poopStrums.forEach(function(spr:FlxSprite){
-				spr.alpha = 0;
-			});*/
 
 			add(altNotes);
 		}
@@ -1855,7 +1841,6 @@ class PlayState extends MusicBeatState
 		}
 
 		if (SONG.song.toLowerCase() == 'applecore') {
-
 			if (poiping) {
 				what.forEach(function(spr:FlxSprite){
 					spr.x += Math.abs(Math.sin(elapsed)) * gasw2[spr.ID];
@@ -1995,13 +1980,8 @@ class PlayState extends MusicBeatState
 						}
 					});
 				}
-				if (!SONG.notes[Math.floor(curStep / 16)].altAnim && wtfThing) {
-					
-					
-				}
+				if (!SONG.notes[Math.floor(curStep / 16)].altAnim && wtfThing) {}
 			}
-
-			
 		}
 
 		//welcome to 3d sinning avenue
@@ -2015,17 +1995,6 @@ class PlayState extends MusicBeatState
 					dad.x = boyfriend.getMidpoint().x + Math.sin(banduJunk) * 500 - (dad.width / 2);
 					dad.y += (Math.sin(elapsedtime) * 0.2);
 					dadmirror.setPosition(dad.x, dad.y);
-
-					/*
-					var deezScale =	(
-						!dadFront ?
-						Math.sqrt(
-					boyfriend.getMidpoint().distanceTo(dad.getMidpoint()) / 500 * 0.5):
-					Math.sqrt(
-					(500 - boyfriend.getMidpoint().distanceTo(dad.getMidpoint())) / 500 * 0.5 + 0.5));
-					dad.scale.set(deezScale, deezScale);
-					dadmirror.scale.set(deezScale, deezScale);
-					*/
 
 					if ((Math.sin(banduJunk) >= 0.95 || Math.sin(banduJunk) <= -0.95) && !hasJunked){
 						dadFront = !dadFront;
@@ -2058,17 +2027,6 @@ class PlayState extends MusicBeatState
 					badai.x = boyfriend.getMidpoint().x + Math.sin(banduJunk) * 500 - (dad.width / 2);
 					badai.y += (Math.sin(elapsedtime) * 0.2);
 					dadmirror.setPosition(dad.x, dad.y);
-
-					/*
-					var deezScale =	(
-						!dadFront ?
-						Math.sqrt(
-					boyfriend.getMidpoint().distanceTo(dad.getMidpoint()) / 500 * 0.5):
-					Math.sqrt(
-					(500 - boyfriend.getMidpoint().distanceTo(dad.getMidpoint())) / 500 * 0.5 + 0.5));
-					dad.scale.set(deezScale, deezScale);
-					dadmirror.scale.set(deezScale, deezScale);
-					*/
 
 					if ((Math.sin(banduJunk) >= 0.95 || Math.sin(banduJunk) <= -0.95) && !hasJunked){
 						dadFront = !dadFront;
@@ -2113,10 +2071,7 @@ class PlayState extends MusicBeatState
 					boyfriend.y += (Math.sin(elapsedtime) * 0.6);
 			}
 		}
-		/*if(funnyFloatyBoys.contains(dadmirror.curCharacter.toLowerCase()))
-		{
-			dadmirror.y += (Math.sin(elapsedtime) * 0.6);
-		}*/
+
 		if(funnyFloatyBoys.contains(gf.curCharacter.toLowerCase()) && canFloat)
 		{
 			gf.y += (Math.sin(elapsedtime) * 0.6);
@@ -2334,12 +2289,6 @@ class PlayState extends MusicBeatState
 				iconP2.animation.curAnim.curFrame = 1:
 				iconP2.animation.curAnim.curFrame = 0;
 		}
-
-		//iconP2.animation.curAnim.curFrame = 0;
-				
-
-		/* if (FlxG.keys.justPressed.NINE)
-			FlxG.switchState(new Charting()); */
 
 		if (FlxG.keys.justPressed.EIGHT)
 		{
@@ -2905,10 +2854,8 @@ class PlayState extends MusicBeatState
 		if (SONG.validScore)
 		{
 			trace("score is valid");
-			#if !switch
 			Highscore.saveScore(SONG.song, songScore, storyDifficulty, characteroverride == "none"
 				|| characteroverride == "bf" ? "bf" : characteroverride);
-			#end
 		}
 
 		if (curSong.toLowerCase() == 'bonus-song')
@@ -3188,10 +3135,6 @@ class PlayState extends MusicBeatState
 
 				daLoop++;
 			}
-			/* 
-				trace(combo);
-				trace(seperatedScore);
-			 */
 
 			coolText.text = Std.string(seperatedScore);
 			// add(coolText);
