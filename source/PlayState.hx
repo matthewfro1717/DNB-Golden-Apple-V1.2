@@ -1234,7 +1234,6 @@ class PlayState extends MusicBeatState
 			}
 
 			switch (swagCounter)
-
 			{
 				case 0:
 					FlxG.sound.play(Paths.sound('intro3'), 0.6);
@@ -1961,7 +1960,7 @@ class PlayState extends MusicBeatState
 						}
 					});
 				}
-				if (!SONG.notes[Math.floor(curStep / 16)].altAnim && wtfThing) {}
+				// if (!SONG.notes[Math.floor(curStep / 16)].altAnim && wtfThing) {}
 			}
 		}
 
@@ -2343,21 +2342,6 @@ class PlayState extends MusicBeatState
 
 		FlxG.watch.addQuick("beatShit", curBeat);
 		FlxG.watch.addQuick("stepShit", curStep);
-
-		if (curSong.toLowerCase() == 'furiosity')
-		{
-			switch (curBeat)
-			{
-				case 127:
-					camZooming = true;
-				case 159:
-					camZooming = false;
-				case 191:
-					camZooming = true;
-				case 223:
-					camZooming = false;
-			}
-		}
 
 		if (health <= 0)
 		{
@@ -2801,10 +2785,8 @@ class PlayState extends MusicBeatState
 				camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 			case 'bandu-candy':
 				camFollow.set(char.getMidpoint().x + 175, char.getMidpoint().y - 85);
-
 			case 'bambom':
 				camFollow.y += 100;
-
 			case 'sart-producer':
 				camFollow.x -= 100;
 			case 'sart-producer-night':
@@ -3561,11 +3543,6 @@ class PlayState extends MusicBeatState
 		{
 			if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null)
 			{
-				if (curBeat % 4 == 0)
-				{
-					// trace(PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection);
-				}
-
 				if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
 				{
 					focusOnDadGlobal = true;
@@ -3597,13 +3574,7 @@ class PlayState extends MusicBeatState
 				Conductor.changeBPM(SONG.notes[Math.floor(curStep / 16)].bpm);
 				FlxG.log.add('CHANGED BPM!');
 			}
-			// else
-			// Conductor.changeBPM(SONG.bpm);
 		}
-		/*
-		if (dad.curCharacter == 'bandu')  {
-			krunkity = dadmirror.animation.finished && dad.animation.finished;
-		}*/
 		if (dad.animation.finished)
 		{
 			switch (SONG.song.toLowerCase())
@@ -3641,7 +3612,6 @@ class PlayState extends MusicBeatState
 			if (littleIdiot.animation.finished && littleIdiot.holdTimer <= 0 && curBeat % dadDanceSnap == 0) littleIdiot.dance();
 		}
 
-		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 		wiggleShit.update(Conductor.crochet);
 
 		if (camZooming && FlxG.camera.zoom < (1.35 * camZoomIntensity) && curBeat % camBeatSnap == 0)
