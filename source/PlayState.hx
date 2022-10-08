@@ -3580,7 +3580,7 @@ class PlayState extends MusicBeatState
 						fuckingDumbassBullshitFuckYou = 'LEFT';
 				}
 			}
-			if(shakingChars.contains(dad.curCharacter))
+			if(shakingChars.contains(boyfriend.curCharacter))
 			{
 				FlxG.camera.shake(0.0075, 0.1);
 				camHUD.shake(0.0045, 0.1);
