@@ -286,8 +286,6 @@ class PlayState extends MusicBeatState
 
 	var thunderBlack:FlxSprite;
 
-	var iconP1IsPlayer:Bool = true;
-
 	override public function create()
 	{
 		theFunne = FlxG.save.data.newInput;
@@ -793,6 +791,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.borderSize = 1.5;
 		add(scoreTxt);
 
+		var iconP1IsPlayer:Bool = true;
 		if(SONG.song.toLowerCase() == 'wireframe')
 		{
 			iconP1IsPlayer = false;
@@ -817,6 +816,11 @@ class PlayState extends MusicBeatState
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 
+		// if (SONG.song == 'South')
+		// FlxG.camera.alpha = 0.7;
+		// UI_camera.zoom = 1;
+
+		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 
 		if (isStoryMode || FlxG.save.data.freeplayCuts)
@@ -2671,7 +2675,7 @@ class PlayState extends MusicBeatState
 								fuckingDumbassBullshitFuckYou = 'LEFT';
 						}
 					}
-					if(shakingChars.contains(dad.curCharacter) || shakingChars.contains(boyfriend.curCharacter))
+					if(shakingChars.contains(dad.curCharacter))
 					{
 						FlxG.camera.shake(0.0075, 0.1);
 						camHUD.shake(0.0045, 0.1);
@@ -3576,7 +3580,7 @@ class PlayState extends MusicBeatState
 						fuckingDumbassBullshitFuckYou = 'LEFT';
 				}
 			}
-			if(shakingChars.contains(boyfriend.curCharacter))
+			if(shakingChars.contains(dad.curCharacter))
 			{
 				FlxG.camera.shake(0.0075, 0.1);
 				camHUD.shake(0.0045, 0.1);
