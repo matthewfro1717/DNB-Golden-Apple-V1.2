@@ -73,23 +73,11 @@ class TitleState extends MusicBeatState
 			LoadingState.loadAndSwitchState(new SusState());
 		}
 
-		PlayerSettings.init();
-
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
 		// DEBUG BULLSHIT
 
-		#if desktop
-		DiscordClient.initialize();
-		#end
-
 		super.create();
-			
-		FlxG.save.bind('funkin', 'ninjamuffin99');
-
-		SaveDataHandler.initSave();
-
-		Highscore.load();
 
 		if (FlxG.save.data.weekUnlocked != null)
 		{
