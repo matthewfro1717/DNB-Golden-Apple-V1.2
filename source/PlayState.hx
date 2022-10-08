@@ -950,23 +950,17 @@ class PlayState extends MusicBeatState
 			case 'ferocious':
 				//todo later since im very tired.
 
-			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness' | 'disruption' | 'disability' | 'origin' | 'metallic' | 'strawberry' | 'keyboard':
+			case 'disruption' | 'disability' | 'origin' | 'metallic' | 'strawberry' | 'keyboard':
 				defaultCamZoom = 0.9;
 				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
 				bg.active = true;
 	
 				switch (SONG.song.toLowerCase())
 				{
-					case 'cheating':
-						bg.loadGraphic(Paths.image('dave/cheater'));
-						curStage = 'cheating';
 					case 'disruption':
 						gfSpeed = 2;
 						bg.loadGraphic(Paths.image('dave/disruptor'));
 						curStage = 'disrupt';
-					case 'unfairness':
-						bg.loadGraphic(Paths.image('dave/scarybg'));
-						curStage = 'unfairness';
 					case 'disability':
 						bg.loadGraphic(Paths.image('dave/disabled'));
 						curStage = 'disabled';
