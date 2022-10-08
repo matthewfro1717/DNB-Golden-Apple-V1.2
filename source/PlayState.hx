@@ -2294,7 +2294,7 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			scoreTxt.text = "Score:" + songScore + " | Misses:" + misses + " | Accuracy:" + truncateFloat(accuracy, 2) + "% ";
+			scoreTxt.text = "Score:" + songScore + " | Misses:" + misses;
 		}
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
