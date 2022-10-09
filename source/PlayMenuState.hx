@@ -15,6 +15,8 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import lime.app.Application;
+import sys.FileSystem;
+import openfl.Lib;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -217,21 +219,25 @@ class PlayMenuState extends MusicBeatState
 								case 'story mode':
 									FlxG.switchState(new StoryMenuState());
 								case 'extras':
-									FlxG.switchState(new ExtraSongState());
+									FlxG.switchState(new CatagorySelect());
 								default:
-									var poop:String = Highscore.formatSong(daChoice, 1);
-
-									trace(poop);
-						
-									PlayState.SONG = Song.loadFromJson(poop, daChoice);
-									PlayState.isStoryMode = false;
-									PlayState.storyDifficulty = 1;
-									PlayState.xtraSong = false;
-						
-									PlayState.storyWeek = 1;
-									PlayState.characteroverride = 'none';
-									PlayState.formoverride = 'none';
-									LoadingState.loadAndSwitchState(new PlayState());
+									if (FileSystem.exists('assets/data/' + daChoice.toLowerCase() + '/' + daChoice.toLowerCase() + '.json')) { //debuging lol
+										var poop:String = Highscore.formatSong(daChoice, 1);
+										trace(poop);
+							
+										PlayState.SONG = Song.loadFromJson(poop, daChoice);
+										PlayState.isStoryMode = false;
+										PlayState.storyDifficulty = 1;
+										PlayState.xtraSong = false;
+							
+										PlayState.storyWeek = 1;
+										PlayState.characteroverride = 'none';
+										PlayState.formoverride = 'none';
+										LoadingState.loadAndSwitchState(new PlayState());
+									} else {
+										Lib.application.window.alert("the song " + daChoice + " doesn't seem to have a json or folder", "Haxe is amazing.");
+										FlxG.switchState(new PlayMenuState());
+									}
 							}
 						});
 					}

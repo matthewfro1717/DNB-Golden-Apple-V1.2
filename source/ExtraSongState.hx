@@ -59,12 +59,37 @@ class ExtraSongState extends MusicBeatState
         
 		switch (category) {
 			case 0:
-				//categories in order but rn im way to fucking tired.
+				//extra songs
+				addWeek(['Origin'], 2, ['bandu-origin']);
+				//have to add other songs
+			case 1:
+				//oc songs
+				addWeek(['Metallic', 'Strawberry', 'Keyboard'], 2, ['ringi', 'bambom', 'bendu']);
+				//have to add other songs
+			case 2:
+				//joke songs
+				addWeek(['Wheels'], 1, ['dave-wheels']);
+				//have to add other songs
+			case 3:
+				//if you know songs
+				//since there is nothing there is gonna be a null object reference
+			case 4:
+				//secret songs
+				addWeek(['Dave-x-Bambi-Shipping-Cute', 'RECOVERED-PROJECT'], 1, ['dave-good', 'RECOVERED_PROJECT']);
+				//have to add other songs
+			case 5:
+				//top 10 songs
+				//since there is nothing there is gonna be a null object reference
+			case 6:
+				//cover songs
+				addWeek(['Thunderstorm'], 1, ['dave-png']);
+				addWeek(['Cycles'], 2, ['sart-producer']);
+				//have to add other songs
 		}
 
-		addWeek(['Sugar-Rush', 'Origin', 'Metallic', 'Strawberry', 'Keyboard', 'Cycles'], 2, ['bandu-candy', 'bandu-origin', 'ringi', 'bambom', 'bendu', 'sart-producer']);
-        addWeek(['Thunderstorm', 'Wheels', 'Dave-x-Bambi-Shipping-Cute', 'RECOVERED-PROJECT'], 1, ['dave-png', 'dave-wheels', 'dave-good', 'RECOVERED_PROJECT']);
-		addWeek(['Sart-Producer'], 4, ['sart-producer']);
+		// addWeek(['Sugar-Rush', 'Origin', 'Metallic', 'Strawberry', 'Keyboard', 'Cycles'], 2, ['bandu-candy', 'bandu-origin', 'ringi', 'bambom', 'bendu', 'sart-producer']);
+        // addWeek(['Thunderstorm', 'Wheels', 'Dave-x-Bambi-Shipping-Cute', 'RECOVERED-PROJECT'], 1, ['dave-png', 'dave-wheels', 'dave-good', 'RECOVERED_PROJECT']);
+		//addWeek(['Sart-Producer'], 4, ['sart-producer']); //i can't tell if this was removed since i can't even open dnb due to shaders being shit on wineskin.
 
         grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);

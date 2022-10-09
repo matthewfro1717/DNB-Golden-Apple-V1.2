@@ -194,8 +194,6 @@ class PlayState extends MusicBeatState
 
 	public var bfSpazOut:Bool = false;
 
-	private var STUPDVARIABLETHATSHOULDNTBENEEDED:FlxSprite;
-
 	private var healthBarBG:FlxSprite;
 	private var healthBar:FlxBar;
 
@@ -226,13 +224,10 @@ class PlayState extends MusicBeatState
 	var songScore:Int = 0;
 	var scoreTxt:FlxText;
 
-	var GFScared:Bool = false;
-
 	public static var dadChar:String = 'bf';
 	public static var bfChar:String = 'bf';
 
 	var scaryBG:FlxSprite;
-	var showScary:Bool = false;
 
 	public static var campaignScore:Int = 0;
 
@@ -243,8 +238,7 @@ class PlayState extends MusicBeatState
 	public static var daPixelZoom:Float = 6;
 
 	public static var theFunne:Bool = true;
-
-	var funneEffect:FlxSprite;
+	
 	var inCutscene:Bool = false;
 
 	public static var timeCurrently:Float = 0;
@@ -2284,11 +2278,11 @@ class PlayState extends MusicBeatState
 
 		if (FlxG.save.data.accuracyDisplay)
 		{
-			scoreTxt.text = "Score:" + songScore + " | Misses:" + misses + " | Accuracy:" + truncateFloat(accuracy, 2) + "% ";
+			scoreTxt.text = "Score:" + songScore + " | Misses:" + misses;
 		}
 		else
 		{
-			scoreTxt.text = "Score:" + songScore + " | Misses:" + misses;
+			scoreTxt.text = "Score:" + songScore + " | Misses:" + misses + " | Accuracy:" + truncateFloat(accuracy, 2) + "% ";
 		}
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
