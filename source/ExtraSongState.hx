@@ -72,7 +72,8 @@ class ExtraSongState extends MusicBeatState
 				//have to add other songs
 			case 3:
 				//if you know songs
-				//since there is nothing there is gonna be a null object reference
+				addWeek(['Og'], 1, ['null']);
+				//have to add other songs
 			case 4:
 				//secret songs
 				addWeek(['Dave-x-Bambi-Shipping-Cute', 'RECOVERED-PROJECT'], 1, ['dave-good', 'RECOVERED_PROJECT']);
@@ -161,7 +162,7 @@ class ExtraSongState extends MusicBeatState
             changeSelection(1);
 
         if (controls.BACK)
-            FlxG.switchState(new PlayMenuState());
+            FlxG.switchState(new CategorySelect());
 
         if (controls.ACCEPT)
 		{

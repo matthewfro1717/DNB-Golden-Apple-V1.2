@@ -432,7 +432,7 @@ class PlayState extends MusicBeatState
 			gf.visible = false;
 		}
 
-		if (SONG.song.toLowerCase() == 'algebra' || SONG.song.toLowerCase() == 'ferocious')
+		if (SONG.song.toLowerCase() == 'algebra' || SONG.song.toLowerCase() == 'ferocious' || SONG.song.toLowerCase() == 'og')
 		{
 			gf.visible = false;
 		}
@@ -582,6 +582,9 @@ class PlayState extends MusicBeatState
 			boyfriend.y -= 150;
 			gf.visible = false;
 		}
+
+		if (curStage == 'og')
+			dad.y -= 25;
 
 		if(dad.curCharacter == 'bandu-origin')
 		{
@@ -1023,6 +1026,34 @@ class PlayState extends MusicBeatState
 				IPADBG.updateHitbox();
 				sprites.add(IPADBG);
 				add(IPADBG);
+
+			case 'og':
+				curStage = 'og';
+				defaultCamZoom = 0.9;
+				var bgSKY:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('ogStage/ogBackground', 'shared'));
+				bgSKY.screenCenter();
+				sprites.add(bgSKY);
+				add(bgSKY);
+
+				var bgClouds:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('ogStage/ogClouds', 'shared'));
+				bgClouds.screenCenter();
+				sprites.add(bgClouds);
+				add(bgClouds);
+
+				var bgWindow:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('ogStage/ogWindow', 'shared'));
+				bgWindow.screenCenter();
+				sprites.add(bgWindow);
+				add(bgWindow);
+
+				var ceiling:FlxSprite = new FlxSprite(0, -850).loadGraphic(Paths.image('ogStage/ogCeiling', 'shared'));
+				ceiling.screenCenter(X);
+				sprites.add(ceiling);
+				add(ceiling);
+
+				var grass:FlxSprite = new FlxSprite(0, 500).loadGraphic(Paths.image('ogStage/ogGrass', 'shared'));
+				grass.screenCenter(X);
+				sprites.add(grass);
+				add(grass);
 				
 			case 'disruption' | 'disability' | 'origin' | 'metallic' | 'strawberry' | 'keyboard':
 				defaultCamZoom = 0.9;

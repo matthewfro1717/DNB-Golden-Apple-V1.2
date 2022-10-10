@@ -219,7 +219,7 @@ class PlayMenuState extends MusicBeatState
 								case 'story mode':
 									FlxG.switchState(new StoryMenuState());
 								case 'extras':
-									FlxG.switchState(new CatagorySelect());
+									FlxG.switchState(new CategorySelect());
 								default:
 									if (FileSystem.exists('assets/data/' + daChoice.toLowerCase() + '/' + daChoice.toLowerCase() + '.json')) { //debuging lol
 										var poop:String = Highscore.formatSong(daChoice, 1);

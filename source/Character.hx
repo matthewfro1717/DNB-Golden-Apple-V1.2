@@ -1037,6 +1037,23 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 0, -20);
 				
 				playAnim('idle');
+			case 'prealpha':
+				// DAD ANIMATION LOADING CODE
+				tex = Paths.getSparrowAtlas('characters/prealpha_dude');
+				frames = tex;
+				animation.addByPrefix('idle', 'Dad idle dance0', 24);
+				animation.addByPrefix('singUP', 'Dad Sing note UP0', 24);
+				animation.addByPrefix('singLEFT', 'dad sing note right0', 24);
+				animation.addByPrefix('singDOWN', 'Dad Sing Note DOWN0', 24);
+				animation.addByPrefix('singRIGHT', 'Dad Sing Note LEFT0', 24);
+				
+				addOffset('idle', 0, 0);
+				addOffset("singUP", -6, 46);
+				addOffset("singRIGHT", -1, 21);
+				addOffset("singLEFT", -9, 4);
+				addOffset("singDOWN", 2, -33);
+				
+				playAnim('idle');
 		}
 		dance();
 
