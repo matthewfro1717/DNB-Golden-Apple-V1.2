@@ -285,6 +285,15 @@ class PlayState extends MusicBeatState
 	var yoMAMA2:FlxTween;
 	var cameraOFFSET:Float = 0;
 
+	private var noteLimbo:Note;
+
+	private var noteLimboFrames:Int;
+
+	var possibleNotes:Array<Note> = [];
+
+	var bfNoteCamOffset:Array<Float> = new Array<Float>();
+	var dadNoteCamOffset:Array<Float> = new Array<Float>();
+
 	override public function create()
 	{
 		theFunne = FlxG.save.data.newInput;
@@ -2857,6 +2866,12 @@ class PlayState extends MusicBeatState
 		{
 			focusOnChar(badaiTime ? badai : dad);
 
+			bfNoteCamOffset[0] = 0;
+			bfNoteCamOffset[1] = 0;
+
+			camFollow.x += dadNoteCamOffset[0];
+			camFollow.y += dadNoteCamOffset[1];
+
 			if (SONG.song.toLowerCase() == 'tutorial')
 			{
 				tweenCamIn();
@@ -2866,6 +2881,12 @@ class PlayState extends MusicBeatState
 		if (!focusondad)
 		{
 			camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
+
+			dadNoteCamOffset[0] = 0;
+			dadNoteCamOffset[1] = 0;
+
+			camFollow.x += bfNoteCamOffset[0];
+			camFollow.y += bfNoteCamOffset[1];
 
 			if (SONG.song.toLowerCase() == 'applecore') defaultCamZoom = 0.5;
 
@@ -3274,13 +3295,46 @@ class PlayState extends MusicBeatState
 		var leftR = controls.LEFT_R;
 
 		var controlArray:Array<Bool> = [leftP, downP, upP, rightP];
+		var releaseArray:Array<Bool> = [leftR, downR, upR, rightR];
+
+		// Strawberry input system by Ben https://github.com/benjaminpants/Funkin-Strawberry
+		if (noteLimbo != null)
+		{
+			if (noteLimbo.exists)
+			{
+				if (noteLimbo.wasGoodHit)
+				{
+					goodNoteHit(noteLimbo);
+					if (noteLimbo.wasGoodHit)
+					{
+						noteLimbo.kill();
+						notes.remove(noteLimbo, true);
+						noteLimbo.destroy();
+					}
+					noteLimbo = null;
+				}
+				else
+				{
+					noteLimbo = null;
+				}
+			}
+		}
+
+		if (noteLimboFrames != 0)
+		{
+			noteLimboFrames--;
+		}
+		else
+		{
+			noteLimbo = null;
+		}
 
 		// FlxG.watch.addQuick('asdfa', upP);
 		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic)
 		{
 			boyfriend.holdTimer = 0;
 
-			var possibleNotes:Array<Note> = [];
+			possibleNotes = [];
 
 			var ignoreList:Array<Int> = [];
 
@@ -3292,8 +3346,8 @@ class PlayState extends MusicBeatState
 				}
 			});
 
-			possibleNotes.sort((a, b) -> Std.int(a.noteData - b.noteData)); //sorting twice is necessary as far as i know
-			haxe.ds.ArraySort.sort(possibleNotes, function(a, b):Int {
+			haxe.ds.ArraySort.sort(possibleNotes, function(a, b):Int
+			{
 				var notetypecompare:Int = Std.int(a.noteData - b.noteData);
 
 				if (notetypecompare == 0)
@@ -3314,16 +3368,22 @@ class PlayState extends MusicBeatState
 				var lasthitnote:Int = -1;
 				var lasthitnotetime:Float = -1;
 
-				for (note in possibleNotes) 
+				for (note in possibleNotes)
 				{
+					if (!note.mustPress)
+					{
+						continue;
+					}
 					if (controlArray[note.noteData % 4])
 					{
 						if (lasthitnotetime > Conductor.songPosition - Conductor.safeZoneOffset
-							&& lasthitnotetime < Conductor.songPosition + (Conductor.safeZoneOffset * 0.2)) //reduce the past allowed barrier just so notes close together that aren't jacks dont cause missed inputs
+							&& lasthitnotetime < Conductor.songPosition +
+							(Conductor.safeZoneOffset * 0.07)) // reduce the past allowed barrier just so notes close together that aren't jacks dont cause missed inputs
 						{
 							if ((note.noteData % 4) == (lasthitnote % 4))
 							{
-								continue; //the jacks are too close together
+								lasthitnotetime = -999999; // reset the last hit note time
+								continue; // the jacks are too close together
 							}
 						}
 						lasthitnote = note.noteData;
@@ -3331,7 +3391,7 @@ class PlayState extends MusicBeatState
 						goodNoteHit(note);
 					}
 				}
-				
+
 				if (daNote.wasGoodHit)
 				{
 					daNote.kill();
@@ -3341,7 +3401,8 @@ class PlayState extends MusicBeatState
 			}
 			else if (!theFunne)
 			{
-				badNoteCheck(null);
+				if (!inCutscene)
+					badNoteCheck(null);
 			}
 		}
 
@@ -3373,46 +3434,24 @@ class PlayState extends MusicBeatState
 
 		if (boyfriend.holdTimer > Conductor.stepCrochet * 4 * 0.001 && !up && !down && !right && !left)
 		{
-			if (boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss'))
+			if ((boyfriend.animation.curAnim.name.startsWith('sing')) && !boyfriend.animation.curAnim.name.endsWith('miss'))
 			{
-				boyfriend.dance();
+				boyfriend.playAnim('idle');
+
+				bfNoteCamOffset[0] = 0;
+				bfNoteCamOffset[1] = 0;
 			}
 		}
 
 		playerStrums.forEach(function(spr:Strum)
 		{
-			switch (spr.ID)
+			if (controlArray[spr.ID] && spr.animation.curAnim.name != 'confirm')
 			{
-				case 2:
-					if (upP && spr.animation.curAnim.name != 'confirm')
-					{
-						spr.animation.play('pressed');
-					}
-					if (upR)
-					{
-						spr.animation.play('static');
-					}
-				case 3:
-					if (rightP && spr.animation.curAnim.name != 'confirm')
-						spr.animation.play('pressed');
-					if (rightR)
-					{
-						spr.animation.play('static');
-					}
-				case 1:
-					if (downP && spr.animation.curAnim.name != 'confirm')
-						spr.animation.play('pressed');
-					if (downR)
-					{
-						spr.animation.play('static');
-					}
-				case 0:
-					if (leftP && spr.animation.curAnim.name != 'confirm')
-						spr.animation.play('pressed');
-					if (leftR)
-					{
-						spr.animation.play('static');
-					}
+				spr.animation.play('pressed');
+			}
+			if (releaseArray[spr.ID])
+			{
+				spr.animation.play('static');
 			}
 
 			if (spr.animation.curAnim.name == 'confirm' && !curStage.startsWith('school') && (SONG.song.toLowerCase() != 'disability'))
@@ -4094,6 +4133,8 @@ class PlayState extends MusicBeatState
 					if (dadmirror.holdTimer <= 0 && curBeat % dadDanceSnap == 0)
 						dadmirror.dance(idleAlt);
 			}
+			dadNoteCamOffset[0] = 0;
+			dadNoteCamOffset[1] = 0;
 		}
 		if(badai != null)
 		{
