@@ -1895,7 +1895,9 @@ class PlayState extends MusicBeatState
 		}
 		if (curbg != null)
 		{
-			if (curbg.active) // only the furiosity background is active
+			// only the furiosity background is active
+			// furiosity ain't even here lol
+			if (curbg.active)
 			{
 				var shad = cast(curbg.shader, Shaders.GlitchShader);
 				shad.uTime.value[0] += elapsed;
