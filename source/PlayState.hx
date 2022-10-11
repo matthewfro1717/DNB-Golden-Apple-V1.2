@@ -296,6 +296,9 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+		// this is the most basic ass optimization system we've got rn
+		openfl.system.System.gc();
+
 		theFunne = FlxG.save.data.newInput;
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
