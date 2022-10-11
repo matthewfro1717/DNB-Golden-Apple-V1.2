@@ -1045,7 +1045,7 @@ class PlayState extends MusicBeatState
 				sprites.add(bgWindow);
 				add(bgWindow);
 
-				var ceiling:FlxSprite = new FlxSprite(0, -850).loadGraphic(Paths.image('ogStage/ogCeiling', 'shared'));
+				var ceiling:FlxSprite = new FlxSprite(0, -865).loadGraphic(Paths.image('ogStage/ogCeiling', 'shared'));
 				ceiling.screenCenter(X);
 				sprites.add(ceiling);
 				add(ceiling);
