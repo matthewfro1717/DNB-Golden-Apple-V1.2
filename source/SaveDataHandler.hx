@@ -1,6 +1,7 @@
 package;
 
 import flixel.input.gamepad.FlxGamepad;
+import flixel.input.keyboard.FlxKey;
 import openfl.Lib;
 import flixel.FlxG;
 
@@ -37,5 +38,17 @@ class SaveDataHandler
 		
 		if (FlxG.save.data.newInput == null && FlxG.save.data.lastversion == null)
 			FlxG.save.data.lastversion = "beta2";
+
+		if (FlxG.save.data.leftKey == null)
+			FlxG.save.data.leftKey = FlxKey.A;
+
+		if (FlxG.save.data.downKey == null)
+			FlxG.save.data.downKey = FlxKey.S;
+
+		if (FlxG.save.data.upKey == null)
+			FlxG.save.data.upKey = FlxKey.W;
+
+		if (FlxG.save.data.rightKey == null)
+			FlxG.save.data.rightKey = FlxKey.D;
     }
 }

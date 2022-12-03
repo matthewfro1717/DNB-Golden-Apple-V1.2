@@ -16,7 +16,7 @@ class PissBoy extends FlxSprite
 	{
 		super(x,y);
 
-		frames = Paths.getSparrowAtlas('dave/pissBoy');
+		frames = Paths.getSparrowAtlas('wireframe/pissBoy');
         animation.addByPrefix('idle', 'IDLE', 24, false);
         animation.addByPrefix('bounceLeft', 'EDGE', 24, false);
         animation.addByPrefix('bounceRight', 'EDGE', 24, false, true);
