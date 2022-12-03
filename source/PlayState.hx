@@ -870,7 +870,7 @@ class PlayState extends MusicBeatState
 				swagger = new Character(-300, 100 - 900 - 400, 'bambi-piss-3d');
 				altSong = Song.loadFromJson('alt-notes', 'applecore');
 
-				scaryBG = new FlxSprite(-350, -375).loadGraphic(Paths.image('bambi/yeah'));
+				scaryBG = new FlxSprite(-350, -375).loadGraphic(Paths.image('applecore/yeah'));
 				scaryBG.scale.set(2, 2);
 				var testshader3:Shaders.GlitchEffect = new Shaders.GlitchEffect();
 				testshader3.waveAmplitude = 0.25;
@@ -882,7 +882,7 @@ class PlayState extends MusicBeatState
 				add(scaryBG);
 				scaryBG.active = false;
 
-				swagBG = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/hi'));
+				swagBG = new FlxSprite(-600, -200).loadGraphic(Paths.image('applecore/hi'));
 				//swagBG.scrollFactor.set(0, 0);
 				swagBG.scale.set(1.75, 1.75);
 				//swagBG.updateHitbox();
@@ -895,7 +895,7 @@ class PlayState extends MusicBeatState
 				add(swagBG);
 				curbg = swagBG;
 
-				unswagBG = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/poop'));
+				unswagBG = new FlxSprite(-600, -200).loadGraphic(Paths.image('applecore/poop'));
 				unswagBG.scale.set(1.75, 1.75);
 				var testshader2:Shaders.GlitchEffect = new Shaders.GlitchEffect();
 				testshader2.waveAmplitude = 0.1;
@@ -916,7 +916,7 @@ class PlayState extends MusicBeatState
 
 				for (i in 0...2) {
 					var pizza = new FlxSprite(FlxG.random.int(100, 1000), FlxG.random.int(100, 500));
-					pizza.frames = Paths.getSparrowAtlas('bambi/pizza');
+					pizza.frames = Paths.getSparrowAtlas('applecore/pizza');
 					pizza.animation.addByPrefix('idle', 'p', 12, true); // https://m.gjcdn.net/game-thumbnail/500/652229-crop175_110_1130_647-stnkjdtv-v4.jpg
 					pizza.animation.play('idle');
 					pizza.ID = i;
@@ -931,7 +931,7 @@ class PlayState extends MusicBeatState
 				curStage = 'algebra';
 				defaultCamZoom = 0.85;
 				swagSpeed = 1.6;
-				var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('dave/algebraBg'));
+				var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('algebra/algebraBg'));
 				bg.setGraphicSize(Std.int(bg.width * 1.35), Std.int(bg.height * 1.35));
 				bg.updateHitbox();
 				//this is temp until good positioning gets done
@@ -941,7 +941,7 @@ class PlayState extends MusicBeatState
 
 				daveJunk = new FlxSprite(424, 122).loadGraphic(bgImg('dave'));
 				davePiss = new FlxSprite(427, 94);
-				davePiss.frames = Paths.getSparrowAtlas('dave/bgJunkers/davePiss');
+				davePiss.frames = Paths.getSparrowAtlas('algebra/bgJunkers/davePiss');
 				davePiss.animation.addByIndices('idle', 'GRR', [0], '', 0, false);
 				davePiss.animation.addByPrefix('d', 'GRR', 24, false);
 				davePiss.animation.play('idle');
@@ -1069,7 +1069,7 @@ class PlayState extends MusicBeatState
 				
 			case 'disruption' | 'disability' | 'origin' | 'metallic' | 'strawberry' | 'keyboard':
 				defaultCamZoom = 0.9;
-				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
+				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky'));
 				bg.active = true;
 	
 				switch (SONG.song.toLowerCase())
@@ -1086,21 +1086,21 @@ class PlayState extends MusicBeatState
 						curStage = 'origin';
 					case 'metallic':
 						defaultCamZoom = 0.7;
-						bg.loadGraphic(Paths.image('bambi/metal'));
+						bg.loadGraphic(Paths.image('ocs/metal'));
 						bg.y -= 235;
 						curStage = 'metallic';
 					case 'strawberry':
 						defaultCamZoom = 0.69;
-						bg.loadGraphic(Paths.image('bambi/strawberries'));
+						bg.loadGraphic(Paths.image('ocs/strawberries'));
 						bg.scrollFactor.set(0, 0);
 						bg.y -= 200;
 						bg.x -= 100;
 						curStage = 'strawberry';
 					case 'keyboard':
-						bg.loadGraphic(Paths.image('bambi/keyboard'));
+						bg.loadGraphic(Paths.image('ocs/keyboard'));
 						curStage = 'keyboard';
 					default:
-						bg.loadGraphic(Paths.image('dave/redsky'));
+						bg.loadGraphic(Paths.image('dave/sky'));
 						curStage = 'daveEvilHouse';
 				}
 				
@@ -1127,7 +1127,7 @@ class PlayState extends MusicBeatState
 				curStage = 'redTunnel';
 				var stupidFuckingRedBg = new FlxSprite().makeGraphic(9999, 9999, FlxColor.fromRGB(42, 0, 0)).screenCenter();
 				add(stupidFuckingRedBg);
-				redTunnel = new FlxSprite(-1000, -700).loadGraphic(Paths.image('bambi/redTunnel'));
+				redTunnel = new FlxSprite(-1000, -700).loadGraphic(Paths.image('wireframe/redTunnel'));
 				redTunnel.setGraphicSize(Std.int(redTunnel.width * 1.15), Std.int(redTunnel.height * 1.15));
 				redTunnel.updateHitbox();
 				sprites.add(redTunnel);
@@ -1140,7 +1140,7 @@ class PlayState extends MusicBeatState
 			case 'wheels':
 				curStage = 'wheels';
 
-				var bg = new FlxSprite(150, 100).loadGraphic(Paths.image('dave/swag'));
+				var bg = new FlxSprite(150, 100).loadGraphic(Paths.image('wheels/swag'));
 				bg.scale.set(3, 3);
 				bg.updateHitbox();
 				bg.scale.set(4.5, 4.5);
@@ -2091,7 +2091,7 @@ class PlayState extends MusicBeatState
 				case 'bandu-candy':
 					dad.x += Math.sin(elapsedtime * 50) / 9;
 				case 'bandu':
-					dad.x = boyfriend.getMidpoint().x + Math.sin(banduJunk) * 500 - (dad.width / 2);
+					dad.x = boyfriend.getMidpoint().x -150 + Math.sin(banduJunk) * 500 - (dad.width / 2);
 					dad.y += (Math.sin(elapsedtime) * 0.2);
 					dadmirror.setPosition(dad.x, dad.y);
 
@@ -2123,7 +2123,7 @@ class PlayState extends MusicBeatState
 			switch(badai.curCharacter) 
 			{
 				case 'bandu':
-					badai.x = boyfriend.getMidpoint().x + Math.sin(banduJunk) * 500 - (dad.width / 2);
+					badai.x = boyfriend.getMidpoint().x - 150 + Math.sin(banduJunk) * 500 - (dad.width / 2);
 					badai.y += (Math.sin(elapsedtime) * 0.2);
 					dadmirror.setPosition(dad.x, dad.y);
 
@@ -4716,7 +4716,7 @@ class PlayState extends MusicBeatState
 	}
 
 	function bgImg(Path:String) {
-		return Paths.image('dave/bgJunkers/$Path');
+		return Paths.image('algebra/bgJunkers/$Path');
 	}
 
 	public function preload(graphic:String) //preload assets

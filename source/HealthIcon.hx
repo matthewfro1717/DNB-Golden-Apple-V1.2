@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxSprite;
 import flixel.math.FlxMath;
+import lime.utils.Assets;
 
 class HealthIcon extends FlxSprite
 {
@@ -53,88 +54,17 @@ class HealthIcon extends FlxSprite
 
 		charPublic = char;
 
-		if(char != 'bandu-origin')
-		{
-			loadGraphic(Paths.image('iconGrid'), true, 150, 150);
-	
-			addIcon('face', 58);
-
-			addIcon('ringi', 28);
-
-			addIcon('bambom', 30);
-
-			addIcon('bendu', 32);
-	
-			addIcon('bf', 0);
-
-			addIcon('3d-bf', 34);
-
-			addIcon('playrobot', 38);
-
-			addIcon('playrobot-crazy', 38);
-
-			addIcon('diamond-man', 40);
-
-			addIcon('hall-monitor', 42);
-
-			addIcon('bambi-good', 44);
-
-			addIcon('sart-producer', 26);
-
-			addIcon('sart-producer-night', 26);
-
-			addIcon('dave-wheels', 36);
-	
-			addIcon('tunnel-bf', 0);
-		
-			addIcon('bf-old', 2);
-		
-			addIcon('gf', 57, true);
-
-			addIcon('bambi-unfair', 4);
-			
-			addIcon('unfair-junker', 4);
-	
-			addIcon('bambi-piss-3d', 6);
-			
-			addIcon('split-dave-3d', 16);
-	
-			addIcon('garrett', 20);
-	
-			addIcon('badai', 18);
-	
-			addIcon('bandu', 8);
-	
-			addIcon('bandu-candy', 8);
-	
-			addIcon('bandu-origin', 8);
-
-			addIcon('bandu-scaredy', 8);
-	
-			addIcon('tunnel-dave', 12);
-	
-			addIcon('og-dave', 14);
-	
-			addIcon('og-dave-angey', 14);
-	
-			addIcon('the-two-dunkers', 10);
-	
-			addIcon('dave-png', 22);
-	
-			addIcon('dave-good', 22);
-			
-			addIcon('RECOVERED_PROJECT', 24);
-
-			addIcon('RECOVERED_PROJECT_2', 24);
-
-			addIcon('RECOVERED_PROJECT_3', 24);
-	
-			animation.play('face');
-		}
-		else
-		{
-			frames = Paths.getSparrowAtlas('bandu_origin_icon');
+		if(char != 'bandu-origin' && Assets.exists('assets/images/icons/$char.png')) {
+			loadGraphic(Paths.image('icons/$char'), true, 150, 150);
+			addIcon(char, 0);
+			animation.play(char);
+		} else if (char == 'bandu-origin' && Assets.exists('assets/images/icons/bandu_origin_icon.png') && Assets.exists('assets/images/icons/bandu_origin_icon.xml')) {
+			frames = Paths.getSparrowAtlas('icons/bandu_origin_icon');
 			animation.addByPrefix(char, char, 24, false, isPlayer, false);
+		} else {
+			loadGraphic(Paths.image('icons/face'), true, 150, 150);
+			addIcon('face', 0);
+			animation.play('face');
 		}
 
 		antialiasing = true;
