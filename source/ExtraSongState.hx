@@ -60,7 +60,7 @@ class ExtraSongState extends MusicBeatState
 		switch (category) {
 			case 0:
 				//extra songs
-				addWeek(['Origin'], 2, ['bandu-origin']);
+				addWeek(['Sugar-Rush', 'Origin'], 2, ['bandu', 'bandu-origin']);
 				//have to add other songs
 			case 1:
 				//oc songs
