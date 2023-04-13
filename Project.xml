@@ -73,7 +73,7 @@
 	<haxelib name="hscript" />
 
 	<haxelib name="actuate" />
-	<haxelib name="extension-webm" if="desktop" />
+	<haxelib name="hxCodec" if="desktop" />
 
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
@@ -106,7 +106,7 @@
 	<icon path="art/icon16.png" size='16'/>
 	<icon path="art/icon32.png" size='32'/>
 	<icon path="art/icon64.png" size='64'/>
-	<icon path="art/iconOG.png" size='1024' if="mac"/> <!--WEIRD BUG ON MACOS VENTURA-->
+	<icon path="art/iconOG.png" size='1024'/> <!--Flixel has a fucking bug-->
 	<icon path="art/iconOG.png" />
 	
 </project>

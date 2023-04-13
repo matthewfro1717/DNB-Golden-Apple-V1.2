@@ -145,7 +145,7 @@ class MainMenuState extends MusicBeatState
 
 		firstStart = false;
 
-		var fortniteShit:FlxText = new FlxText(5, FlxG.height - 34, 0, "Source code by: JuniorNovoa, MemeHoovy and Bushtrain.", 12);
+		var fortniteShit:FlxText = new FlxText(5, FlxG.height - 34, 0, "Source code by: JuniorNovoa and MemeHoovy.", 12);
 		fortniteShit.scrollFactor.set();
 		fortniteShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(fortniteShit);

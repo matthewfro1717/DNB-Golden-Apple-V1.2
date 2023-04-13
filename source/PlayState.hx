@@ -762,20 +762,32 @@ class PlayState extends MusicBeatState
 		add(creditsWatermark);
 		creditsWatermark.cameras = [camHUD];
 
-		switch (curSong.toLowerCase())
-		{
-			case 'wireframe':
-				preload('bambi/badai');
-			case 'algebra':
-				preload('dave/HALL_MONITOR');
-				preload('dave/diamondMan');
-				preload('dave/playrobot');
-				preload('dave/ohshit');
-				preload('dave/garrett_algebra');
-				preload('dave/og_dave_angey');
-			case 'recovered-project':
-				preload('dave/recovered_project_2');
-				preload('dave/recovered_project_3');
+		if (FlxG.save.data.preload == 2) {
+			switch (curSong.toLowerCase())
+			{
+				case 'wireframe':
+					preload('characters/badai');
+				case 'algebra':
+					preload('characters/HALL_MONITOR');
+					preload('characters/diamondMan');
+					preload('characters/playrobot');
+					preload('characters/ohshit');
+					preload('characters/garrett_algebra');
+					preload('characters/og_dave_angey');
+				case 'ferocious':
+					preload('funnyAnimal/playTimeTwoPointOh');
+					preload('funnyAnimal/palooseMen');
+					preload('funnyAnimal/garret_padFuture');
+					preload('funnyAnimal/garrett_bf');
+					preload('funnyAnimal/wizard');
+					preload('funnyAnimal/mrMusic');
+					preload('funnyAnimal/do_you_accept');
+					preload('funnyAnimal/garrett_piss');
+					preload('funnyAnimal/carThing');
+				case 'recovered-project':
+					preload('characters/recovered_project_2');
+					preload('characters/recovered_project_3');
+			}
 		}
 
 		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 150, healthBarBG.y + 40, 0, "", 20);
@@ -1048,6 +1060,7 @@ class PlayState extends MusicBeatState
 				add(bgSKY);
 
 				var bgClouds:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('ogStage/ogClouds', 'shared'));
+				bgClouds.scrollFactor.set(1.1, 1.1);
 				bgClouds.screenCenter();
 				sprites.add(bgClouds);
 				add(bgClouds);
@@ -3064,14 +3077,8 @@ class PlayState extends MusicBeatState
 
 		PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
 		FlxG.sound.music.stop();
-		
-		switch (curSong.toLowerCase())
-		{
-			case 'corn-theft':
-				LoadingState.loadAndSwitchState(new VideoState('assets/videos/mazeecutscenee.webm', new PlayState()), false);
-			default:
-				LoadingState.loadAndSwitchState(new PlayState());
-		}
+
+		LoadingState.loadAndSwitchState(new PlayState());
 	}
 	private function popUpScore(strumtime:Float, notedata:Int):Void
 	{

@@ -27,6 +27,9 @@ class OptionsMenu extends MusicBeatState
 
 	private var grpControls:FlxTypedGroup<Alphabet>;
 	var versionShit:FlxText;
+
+	var preloadTXT:Array<String> = ['Preloading Off', 'Preload At Startup', 'Preload Before Levels'];
+
 	override function create()
 	{
 		#if desktop
@@ -40,7 +43,8 @@ class OptionsMenu extends MusicBeatState
 			(FlxG.save.data.accuracyDisplay ? "off" : "on") + "\n" + 
 			(FlxG.save.data.eyesores ? 'Eyesores Enabled' : 'Eyesores Disabled') + "\n" + 
 			(FlxG.save.data.donoteclick ? "Hitsounds On" : "Hitsounds Off") + "\n" + 
-			(FlxG.save.data.freeplayCuts ? "Cutscenes On" : "Cutscenes Off")
+			(FlxG.save.data.freeplayCuts ? "Cutscenes On" : "Cutscenes Off") + "\n" + 
+			preloadTXT[FlxG.save.data.preload]
 		);
 		
 		trace(controlsStrings);
@@ -159,7 +163,14 @@ class OptionsMenu extends MusicBeatState
 						ctrl.isMenuItem = true;
 						ctrl.targetY = curSelected - 6;
 						grpControls.add(ctrl);
-						
+					case 7:
+						FlxG.save.data.preload += 1;
+						if (FlxG.save.data.preload == 3)
+							FlxG.save.data.preload = 0;
+						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, preloadTXT[FlxG.save.data.preload], true, false);
+						ctrl.isMenuItem = true;
+						ctrl.targetY = curSelected - 7;
+						grpControls.add(ctrl);		
 				}
 			}
 	}

@@ -36,7 +36,7 @@ class CategorySelect extends MusicBeatState
 
 	var shits:Array<String> = ['extra', 'ocs', 'joke', 'iykyk', 'secret', 'awesome', 'covers'];
 	var sprites:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
-	var xdScale:Float = 2.3;
+	var xdScale:Float = 2.5;
 	var curSelected = 0;
 	public static var bgPaths:Array<String> = 
 	[
@@ -165,11 +165,11 @@ class CategorySelect extends MusicBeatState
 
 	function acceptShit() {
 		var timer:Float = 0.6;
-		FlxTween.tween(bg.scale, {x: 0.925, y: 0.925}, timer, {ease: FlxEase.quadInOut});
+		//FlxTween.tween(bg.scale, {x: 0.925, y: 0.925}, timer, {ease: FlxEase.quadInOut});
 
 		sprites.forEach(function(spr:FlxSprite){
 			if (spr.visible == true)
-				FlxTween.tween(spr.scale, {x: xdScale + 1, y: xdScale + 1}, timer, {ease: FlxEase.quadInOut,
+				FlxTween.tween(spr.scale, {x: 4, y: 4}, timer, {ease: FlxEase.quadInOut,
 					onComplete: function(thing:FlxTween) {
 						new FlxTimer().start(0.4, function(tmr:FlxTimer) {
 							FlxG.switchState(new ExtraSongState());

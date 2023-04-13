@@ -33,6 +33,9 @@ import openfl.events.IOErrorEvent;
 import openfl.media.Sound;
 import openfl.net.FileReference;
 import openfl.utils.ByteArray;
+#if desktop
+import vlc.MP4Handler;
+#end
 
 using StringTools;
 
@@ -1132,9 +1135,14 @@ class ChartingState extends MusicBeatState
 
 	function loadJson(song:String):Void
 	{
-		if (song.toLowerCase() == 'recovered-project' || song.toLowerCase() == 'dave-x-bambi-shipping-cute' || song.toLowerCase() == 'cheating' || song.toLowerCase() == 'disruption')
-		{
-			FlxG.switchState(new VideoState('assets/videos/fortnite/fortniteballs.webm', new CrasherState())); //YOU THINK YOU ARE SO CLEVER DON'T YOU? HAHA FUCK YOU
+		if (song.toLowerCase() == 'recovered-project' || song.toLowerCase() == 'dave-x-bambi-shipping-cute' || song.toLowerCase() == 'disruption')
+		{		
+			var video:MP4Handler = new MP4Handler();
+			video.playVideo(Paths.video('fortniteballs'));
+			video.finishCallback = function()
+			{
+				FlxG.switchState(new CrasherState()); //after the sound is done!
+			}
 		}
 		/*else if (song.toLowerCase() == 'unfairness')
 		{
