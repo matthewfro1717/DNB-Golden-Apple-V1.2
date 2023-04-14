@@ -94,7 +94,7 @@ class PlayState extends MusicBeatState
 
 	var songLength:Float = 0;
 
-	public var darkLevels:Array<String> = ['bambiFarmNight', 'daveHouse_night', 'unfairness', 'disabled'];
+	public var darkLevels:Array<String> = ['bambiFarmNight', 'daveHouse_night', 'disabled'];
 	public var sunsetLevels:Array<String> = ['bambiFarmSunset', 'daveHouse_Sunset'];
 
 	public var stupidx:Float = 0;
@@ -370,8 +370,6 @@ class PlayState extends MusicBeatState
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
 
-		theFunne = theFunne && SONG.song.toLowerCase() != 'unfairness';
-
 		var crazyNumber:Int;
 		crazyNumber = FlxG.random.int(0, 3);
 		switch (crazyNumber)
@@ -454,9 +452,9 @@ class PlayState extends MusicBeatState
 
 		if (SONG.song.toLowerCase() == 'algebra') {
 			algebraStander('garrett', garrettStand, 500, 225); 
-				algebraStander('og-dave-angey', daveStand, 250, 100); 
-				algebraStander('hall-monitor', hallMonitorStand, 0, 100); 
-				algebraStander('playrobot-scary', playRobotStand, 750, 100, false, true);
+			algebraStander('og-dave-angey', daveStand, 250, 100); 
+			algebraStander('hall-monitor', hallMonitorStand, 0, 100); 
+			algebraStander('playrobot-scary', playRobotStand, 750, 100, false, true);
 		}
 
 		dad = new Character(100, 100, SONG.player2);
@@ -612,11 +610,6 @@ class PlayState extends MusicBeatState
 
 		if (swagger != null) add(swagger);
 
-		if(SONG.song.toLowerCase() == "unfairness")
-		{
-			health = 2;
-		}
-
 		if(dadChar == 'bandu-candy' || dadChar == 'bambi-piss-3d')
 		{
 			dadDanceSnap = 1;
@@ -733,13 +726,6 @@ class PlayState extends MusicBeatState
 			default:
 				credits = '';
 		}
-		var randomThingy:Int = FlxG.random.int(0, 0);
-		var engineName:String = 'stupid';
-		switch(randomThingy)
-	    {
-			case 0:
-				engineName = 'Golden Apple ';
-		}
 		var creditsText:Bool = credits != '';
 		var textYPos:Float = healthBarBG.y + 50;
 		if (creditsText)
@@ -749,7 +735,7 @@ class PlayState extends MusicBeatState
 		// Add Kade Engine watermark
 		kadeEngineWatermark = new FlxText(4, textYPos, 0,
 		SONG.song
-		+ " - " + engineName + "Engine (KE 1.2)", 16);
+		+ " - " + "Golden Apple " + "Engine (KE 1.2)", 16);
 		kadeEngineWatermark.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
 		kadeEngineWatermark.borderSize = 1.25;
@@ -791,8 +777,7 @@ class PlayState extends MusicBeatState
 		}
 
 		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 150, healthBarBG.y + 40, 0, "", 20);
-		if (!FlxG.save.data.accuracyDisplay)
-			scoreTxt.x = healthBarBG.x + healthBarBG.width / 2;
+		scoreTxt.x = healthBarBG.x + healthBarBG.width / 2;
 		scoreTxt.setFormat(Paths.font("comic.ttf"), 20, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.5;
@@ -2560,7 +2545,7 @@ class PlayState extends MusicBeatState
 
 		if (unspawnNotes[0] != null)
 		{
-			if (unspawnNotes[0].strumTime - Conductor.songPosition < (SONG.song.toLowerCase() == 'unfairness' ? 15000 : 1500))
+			if (unspawnNotes[0].strumTime - Conductor.songPosition < (1500))
 			{
 				var dunceNote:Note = unspawnNotes[0];
 				notes.add(dunceNote);
@@ -2573,7 +2558,7 @@ class PlayState extends MusicBeatState
 
 		if (altUnspawnNotes[0] != null)
 		{
-			if (altUnspawnNotes[0].strumTime - Conductor.songPosition < (SONG.song.toLowerCase() == 'unfairness' ? 15000 : 1500))
+			if (altUnspawnNotes[0].strumTime - Conductor.songPosition < (1500))
 			{
 				var dunceNote:Note = altUnspawnNotes[0];
 				altNotes.add(dunceNote);
@@ -2725,29 +2710,20 @@ class PlayState extends MusicBeatState
 					if (SONG.song.toLowerCase() != 'senpai' && SONG.song.toLowerCase() != 'roses' && SONG.song.toLowerCase() != 'thorns')
 					{
 						dadStrums.forEach(function(sprite:Strum)
+						{
+							if (Math.abs(Math.round(Math.abs(daNote.noteData)) % 4) == sprite.ID)
 							{
-								if (Math.abs(Math.round(Math.abs(daNote.noteData)) % 4) == sprite.ID)
+								sprite.animation.play('confirm', true);
+								sprite.centerOffsets();
+								sprite.centerOrigin();
+								sprite.animation.finishCallback = function(name:String)
 								{
-									sprite.animation.play('confirm', true);
-									if (sprite.animation.curAnim.name == 'confirm' && !curStage.startsWith('school') && (SONG.song.toLowerCase() != 'disability'))
-									{
-										sprite.centerOffsets();
-										sprite.offset.x -= 13;
-										sprite.offset.y -= 13;
-									}
-									else if (SONG.song.toLowerCase() != 'disability')
-									{
-										sprite.centerOffsets();
-									}
-									sprite.animation.finishCallback = function(name:String)
-									{
-										sprite.animation.play('static',true);
-										if (SONG.song.toLowerCase() != 'disability')
-											sprite.centerOffsets();
-									}
-		
+									sprite.animation.play('static',true);
+									sprite.centerOffsets();
+									sprite.centerOrigin();
 								}
-							});
+							}
+						});
 					}
 
 					if (UsingNewCam)
@@ -3460,22 +3436,15 @@ class PlayState extends MusicBeatState
 			if (controlArray[spr.ID] && spr.animation.curAnim.name != 'confirm')
 			{
 				spr.animation.play('pressed');
+				spr.centerOffsets();
+				spr.centerOrigin();
 			}
 			if (releaseArray[spr.ID])
 			{
 				spr.animation.play('static');
-			}
-
-			if (spr.animation.curAnim.name == 'confirm' && !curStage.startsWith('school') && (SONG.song.toLowerCase() != 'disability'))
-			{
 				spr.centerOffsets();
-				spr.offset.x -= 13;
-				spr.offset.y -= 13;
+				spr.centerOrigin();
 			}
-			else if (SONG.song.toLowerCase() != 'disability')
-				spr.centerOffsets();
-			else
-				spr.smartCenterOffsets();
 		});
 	}
 
@@ -3679,6 +3648,9 @@ class PlayState extends MusicBeatState
 				if (Math.abs(note.noteData) == spr.ID)
 				{
 					spr.animation.play('confirm', true);
+					
+					spr.centerOffsets();
+					spr.centerOrigin();
 				}
 			});
 
@@ -3816,29 +3788,6 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	function ChangeCHAR(Player:Int, X:Dynamic, Y:Dynamic, NewCHAR:Dynamic, ?HideFlash:Bool = false) {
-		if (Player == 3){
-			gf.alpha = 0.0000001;
-			remove(gf);
-			gf = new Character(X, Y, NewCHAR);
-			add(gf);
-		} else if (Player == 2) {
-			dad.alpha = 0.0000001;
-			remove(dad);
-			dad = new Character(X, Y, NewCHAR);
-			add(dad);
-		} else if (Player == 1) {
-			boyfriend.alpha = 0.0000001;
-			remove(boyfriend);
-			boyfriend = new Boyfriend(X, Y, NewCHAR);
-			add(boyfriend);
-		}
-		ReloadIcons();
-		if (!HideFlash) {
-			FlxG.camera.flash(FlxColor.WHITE, 0.35, null, true);
-		}
-	}
-
 	override function stepHit()
 	{
 		super.stepHit();
@@ -3861,13 +3810,10 @@ class PlayState extends MusicBeatState
 		#end
 
 	    if (SONG.song.toLowerCase() == 'ferocious') {
-			if (curStep == 12) {
-				trace('THIS IS FOR TESTING LOL');
-			}
-
 			if (curStep == 1152) {
-				ChangeCHAR(2, -110, 220, 'playtime');
-				PlayANIMATION(2, 'garrett pulls out ass');
+				dad = new Character(-110, 220, 'playtime');
+				add(dad);
+				dad.playAnim('garrett pulls out ass');
 				trace('garret summoned playtime out of ass');
 			}
 
@@ -3875,10 +3821,11 @@ class PlayState extends MusicBeatState
 				RUNBITCH.visible = true;
 				BFLEGS2.visible = true;
 				defaultCamZoom = 0.75;
-				ChangeCHAR(2, 840, 840, 'palooseMen');
-				ChangeCHAR(1, -230, 625, '3d-bf-flipped');
-
-				trace('POLICE IS ON YOUR ASS RUN BITCH');
+				dad = new Character(840, 840, 'palooseMen');
+				add(dad);
+				boyfriend = new Boyfriend(-230, 625, '3d-bf-flipped');
+				add(boyfriend);
+				FlxG.camera.flash(FlxColor.WHITE, 0.35, null, true);
 			}
 
 			if (curStep == 3215) {
@@ -3889,8 +3836,11 @@ class PlayState extends MusicBeatState
 
 				var whereTonowlol:Float = dad.x +3800;
 
-				ChangeCHAR(2, 680, 620, 'palooseMen');
-				ChangeCHAR(1, 1340, 1020, '3d-bf');
+				dad = new Character(680, 620, 'palooseMen');
+				add(dad);
+				boyfriend = new Boyfriend(1340, 1020, '3d-bf-flipped');
+				add(boyfriend);
+				FlxG.camera.flash(FlxColor.WHITE, 0.35, null, true);
 
 				FlxTween.tween(dad, {x: whereTonowlol}, 6.5, {
 					startDelay: 1.45, 
@@ -3914,14 +3864,16 @@ class PlayState extends MusicBeatState
 
 				IPADBG.visible = true;
 
-				ChangeCHAR(2, -180, 300, 'garrett-ipad');
-				ChangeCHAR(1, 200, -150, 'bf-ipad');
+				dad = new Character(-180, 300, 'garrett-pad');
+				add(dad);
+				boyfriend = new Boyfriend(200, -150, 'bf-pad');
+				add(boyfriend);
+				FlxG.camera.flash(FlxColor.WHITE, 0.35, null, true);
 
 				IPAD = new FlxSprite(FlxG.width -1800, FlxG.height -1150).loadGraphic(Paths.image('funnyAnimal/futurePad', 'shared'));
 				IPAD.scale.set(2, 2);
 				IPAD.updateHitbox();
 				add(IPAD);
-				trace('GARRETT IS PISSED LOL');
 			}
 
 			if (curStep == 4719) {
@@ -3930,18 +3882,21 @@ class PlayState extends MusicBeatState
 				IPADBG.visible = false;
 				IPAD.visible = false;
 				RUNBITCHSTATIC.visible = true;
-				ChangeCHAR(2, -370, 240, 'wizard');
-				ChangeCHAR(1, 770, 875, '3d-bf');
-				trace('wizard!!!');
+				dad = new Character(-370, 240, 'wizard');
+				add(dad);
+				boyfriend = new Boyfriend(770, 875, '3d-bf');
+				add(boyfriend);
+				FlxG.camera.flash(FlxColor.WHITE, 0.35, null, true);
 			}
 
 			if (curStep == 5903) {
 				RUNBITCHSTATIC.visible = false;
 				RUNBITCH.visible = true;
 				var offsets:Float = boyfriend.x -580;
-				ChangeCHAR(2, offsets, 500, 'piano-guy');
-				ChangeCHAR(1, 770, 900, '3d-bf-flipped');
-				trace('piano guy?');
+				dad = new Character(offsets, 500, 'piano-guy');
+				add(dad);
+				boyfriend = new Boyfriend(770, 900, '3d-bf-flipped');
+				add(boyfriend);
 			}
 
 			if (curStep == 7719) {
@@ -3953,8 +3908,8 @@ class PlayState extends MusicBeatState
 				FlxTween.tween(dad, {x: whereTonowlol}, 1.3, {
 					onComplete: function(twn:FlxTween) 
 					{
-						ChangeCHAR(2, offsets, 320, 'pedophile', true);
-						trace('OH NO ITS A PEDOPHILE RUN BITCH');
+						dad = new Character(offsets, 320, 'pedophile');
+						add(dad);
 					}
 				});
 			}
@@ -3977,8 +3932,10 @@ class PlayState extends MusicBeatState
 				PEDOPHILESTATIC.visible = false;
 				add(PEDOPHILESTATIC);
 
-				ChangeCHAR(2, -370, 420, 'garrett-angry');
-				ChangeCHAR(1, 770, 875, '3d-bf');
+				dad = new Character(-370, 420, 'garrett-angry');
+				add(dad);
+				boyfriend = new Boyfriend(770, 875, '3d-bf');
+				add(boyfriend);
 
 				PEDOPHILESTATIC.animation.play('hey its the toddler');
 				PEDOPHILESTATIC.visible = true;
@@ -4037,8 +3994,11 @@ class PlayState extends MusicBeatState
 				BFLEGS2.visible = true;
 				BFLEGS2.flipX = false;
 				BFLEGS2.x += 1420;
-				ChangeCHAR(1, 1130, 625, '3d-bf');
-				ChangeCHAR(2, -230, 425, 'garrett-car');
+				
+				dad = new Character(-230, 425, 'garrett-car');
+				add(dad);
+				boyfriend = new Boyfriend(1130, 625, '3d-bf');
+				add(boyfriend);
 
 				POLICECAR = new FlxSprite(dad.x, dad.y);
 				POLICECAR.frames = Paths.getSparrowAtlas('funnyAnimal/palooseCar', 'shared');
@@ -4057,6 +4017,25 @@ class PlayState extends MusicBeatState
 
 			if (curStep == 11423) {
 				defaultCamZoom = 0.8;
+			}
+		}
+
+		if (SONG.song.toLowerCase() == 'dave-x-bambi-shipping-cute') {
+			if (curStep == 413) {
+				dad.playAnim('talk');
+				dad.debugMode = true;
+				boyfriend.playAnim('talk');
+				boyfriend.debugMode = true;
+			}
+
+			if (curStep == 526) {
+				dad.debugMode = false;
+				boyfriend.debugMode = false;
+			}
+
+			if (curStep == 911) {
+				dad.playAnim('shit');
+				dad.debugMode = true;
 			}
 		}
 	}

@@ -707,35 +707,43 @@ class Character extends FlxSprite
 				playAnim('idle');
 			case 'bambi-good':
 				// PLACEHOLDER! !  ! !
-				frames = Paths.getSparrowAtlas('characters/PLACEHOLDER_BAMBI');
-				animation.addByPrefix('idle', 'Idle', 24, false);
-				animation.addByPrefix('singDOWN', 'down', 24, false);
-				animation.addByPrefix('singUP', 'up', 24, false);
-				animation.addByPrefix('singLEFT', 'left', 24, false);
-				animation.addByPrefix('singRIGHT', 'right', 24, false);
+				frames = Paths.getSparrowAtlas('characters/bambiShip');
+				animation.addByPrefix('idle', 'IDLE', 24, false);
+				animation.addByPrefix('singUP', 'UP', 24, false);
+				animation.addByPrefix('singRIGHT', 'RIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
+				animation.addByPrefix('talk', 'TALK', 24, false);
+				animation.addByPrefix('shit', 'HOLYSHIT', 24, false);
 
 				addOffset('idle');
-				addOffset("singUP", 54, 3);
-				addOffset("singRIGHT", -50, 0);
-				addOffset("singLEFT", 20, -7);
-				addOffset("singDOWN", -5, -43);
+				addOffset("singUP", -10, 9);
+				addOffset("singRIGHT", 0, 0);
+				addOffset("singLEFT", 10, -5);
+				addOffset("singDOWN", -15, -5);
+				addOffset("talk", -4, 13);
+				addOffset("shit", 0, 5);
 
 				playAnim('idle');
 			case 'dave-good':
 				// allso uh placeholder
-				tex = Paths.getSparrowAtlas('characters/PLACEHOLDER_DAVE');
+				tex = Paths.getSparrowAtlas('characters/daveShip');
 				frames = tex;
-				animation.addByPrefix('idle', 'idleDance', 24, false);
-				animation.addByPrefix('singUP', 'Up', 24, false);
-				animation.addByPrefix('singRIGHT', 'Right', 24, false);
-				animation.addByPrefix('singDOWN', 'Down', 24, false);
-				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('idle', 'IDLE', 24, false);
+				animation.addByPrefix('singUP', 'UP', 24, false);
+				animation.addByPrefix('singRIGHT', 'LEFT', 24, false);
+				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'RIGHT', 24, false);
+				animation.addByPrefix('talk', 'TALK', 24, false);
 	
 				addOffset('idle');
-				addOffset("singUP", -18, 12);
-				addOffset("singRIGHT", -5, -2);
-				addOffset("singLEFT", -29, 2);
-				addOffset("singDOWN", -5, 2);
+				addOffset("singUP", -10, 9);
+				addOffset("singRIGHT", 0, 0);
+				addOffset("singLEFT", 10, -5);
+				addOffset("singDOWN", -15, -5);
+				addOffset("talk", -4, 13);
+
+				flipX = true;
 
 				playAnim('idle');
 			case 'unfair-junker':
@@ -816,7 +824,7 @@ class Character extends FlxSprite
 				addOffset('idle');
 				addOffset("singUP");
 				addOffset("singRIGHT");
-				addOffset("singLEFT", 57);
+				addOffset("singLEFT", 90);
 				addOffset("singDOWN");
 				addOffset('turn');
 
@@ -902,7 +910,7 @@ class Character extends FlxSprite
 				scale.set(1.3, 1.3);
 				
 			    playAnim('idle');
-			case 'garrett-ipad':
+			case 'garrett-pad':
 				// DAD ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('funnyAnimal/garret_padFuture', 'shared');
 				frames = tex;
@@ -919,7 +927,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN", -78, -111);
 			
 				playAnim('idle');
-			case 'bf-ipad':
+			case 'bf-pad':
 				var tex = Paths.getSparrowAtlas('funnyAnimal/garrett_bf', 'shared');
 				frames = tex;
 				animation.addByPrefix('idle', 'idle0', 24, false);
@@ -1141,7 +1149,7 @@ class Character extends FlxSprite
 			//trace(AnimName);
 			return; //why wasn't this a thing in the first place
 		}
-		if(AnimName.toLowerCase().startsWith('idle') && !canDance)
+		if(AnimName.toLowerCase().startsWith('idle') && !canDance || debugMode)
 		{
 			return;
 		}

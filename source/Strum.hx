@@ -30,6 +30,5 @@ class Strum extends FlxSprite
 
     override function update(t:Float) {
         super.update(t);
-        //if (PlayState.SONG.song.toLowerCase() == 'disability') centerOffsets();
     }
 }
