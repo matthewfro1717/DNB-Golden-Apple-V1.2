@@ -605,7 +605,8 @@ class PlayState extends MusicBeatState
 		dadChar = dad.curCharacter;
 		bfChar = boyfriend.curCharacter;
 
-		if (SONG.song.toLowerCase() == 'dave-x-bambi-shipping-cute') gf.visible = false;
+		if (SONG.song.toLowerCase() == 'cuberoot' || SONG.song.toLowerCase() == 'dave-x-bambi-shipping-cute') gf.visible = false;
+		if (SONG.song.toLowerCase() == 'cuberoot') boyfriend.y -= 185;
 		if (curStage == 'house') gf.visible = false;
 
 		if (swagger != null) add(swagger);
@@ -733,9 +734,7 @@ class PlayState extends MusicBeatState
 			textYPos = healthBarBG.y + 30;
 		}
 		// Add Kade Engine watermark
-		kadeEngineWatermark = new FlxText(4, textYPos, 0,
-		SONG.song
-		+ " - " + "Golden Apple " + "Engine (KE 1.2)", 16);
+		kadeEngineWatermark = new FlxText(4, textYPos, 0,SONG.song, 16);
 		kadeEngineWatermark.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
 		kadeEngineWatermark.borderSize = 1.25;
@@ -777,10 +776,13 @@ class PlayState extends MusicBeatState
 		}
 
 		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 150, healthBarBG.y + 40, 0, "", 20);
-		scoreTxt.x = healthBarBG.x + healthBarBG.width / 2;
 		scoreTxt.setFormat(Paths.font("comic.ttf"), 20, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.5;
+		scoreTxt.updateHitbox();
+		scoreTxt.screenCenter(X);
+		if (!FlxG.save.data.accuracyDisplay)
+			scoreTxt.x /= 1.35; //fixed text being off
 		add(scoreTxt);
 
 		var iconP1IsPlayer:Bool = true;
@@ -1065,7 +1067,7 @@ class PlayState extends MusicBeatState
 				sprites.add(grass);
 				add(grass);
 				
-			case 'disruption' | 'disability' | 'origin' | 'metallic' | 'strawberry' | 'keyboard':
+			case 'disruption' | 'disability' | 'origin' | 'metallic' | 'strawberry' | 'keyboard' | 'cuberoot':
 				defaultCamZoom = 0.9;
 				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky'));
 				bg.active = true;
@@ -1097,6 +1099,9 @@ class PlayState extends MusicBeatState
 					case 'keyboard':
 						bg.loadGraphic(Paths.image('ocs/keyboard'));
 						curStage = 'keyboard';
+					case 'cuberoot':
+						bg.loadGraphic(Paths.image('dave/cuberoot'));
+						curStage = 'cuberoot';
 					default:
 						bg.loadGraphic(Paths.image('dave/sky'));
 						curStage = 'daveEvilHouse';
@@ -1105,7 +1110,7 @@ class PlayState extends MusicBeatState
 				sprites.add(bg);
 				add(bg);
 
-				if (SONG.song.toLowerCase() == 'disruption') {
+				if (SONG.song.toLowerCase() == 'disruption' || SONG.song.toLowerCase() == 'cuberoot') {
 					poop = new StupidDumbSprite(-100, -100, 'lol');
 					poop.makeGraphic(Std.int(1280 * 1.4), Std.int(720 * 1.4), FlxColor.BLACK);
 					poop.scrollFactor.set(0, 0);
@@ -1682,7 +1687,6 @@ class PlayState extends MusicBeatState
 
 			strumLineNotes.add(babyArrow);
 
-			if (isFunnySong || SONG.song.toLowerCase() == 'disruption')
 			arrowJunks.push([babyArrow.x, babyArrow.y]);
 			
 			babyArrow.resetTrueCoords();
@@ -2282,6 +2286,22 @@ class PlayState extends MusicBeatState
 			});
 		}
 
+		if (SONG.song.toLowerCase() == 'cuberoot') // THIS TOOK A FUCKING HOUR UGHHHHH
+		{
+			var krunkThing = 10;
+	
+			poop.alpha = Math.sin(elapsedtime) / 2.5 + 0.4;
+
+			playerStrums.forEach(function(spr:FlxSprite)
+			{
+				spr.y = arrowJunks[spr.ID][1] + Math.sin(elapsedtime - 5 * (spr.ID + 1)) * (spr.ID + 2) * krunkThing;
+			});
+			dadStrums.forEach(function(spr:Strum)
+			{
+				spr.y = arrowJunks[spr.ID][1] + Math.sin(elapsedtime - 5 * (spr.ID + 1)) * (spr.ID + 2) * krunkThing;
+			});
+		}
+
 		FlxG.watch.addQuick("WHAT", Conductor.songPosition);
 			
 		FlxG.camera.setFilters([new ShaderFilter(screenshader.shader)]); // this is very stupid but doesn't effect memory all that much so
@@ -2726,6 +2746,24 @@ class PlayState extends MusicBeatState
 						});
 					}
 
+					var camVal1 = 0;
+					var camVal2 = 0;
+					switch(notestuffs[Math.round(Math.abs(daNote.noteData)) % 4])
+					{
+						case 'LEFT':
+							camVal1 -= 30;
+						case 'DOWN':
+							camVal2 += 30;
+						case 'UP':
+							camVal2 -= 30;
+						case 'RIGHT':
+							camVal1 += 30;
+					}
+					if (dad.animation.curAnim.name.contains('sing')) {
+						dadNoteCamOffset[0] = camVal1;
+						dadNoteCamOffset[1] = camVal2;
+					}
+
 					if (UsingNewCam)
 					{
 						focusOnDadGlobal = true;
@@ -2767,11 +2805,11 @@ class PlayState extends MusicBeatState
 							daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (-0.45 * FlxMath.roundDecimal(swagSpeed * daNote.LocalScrollSpeed, 2)));
 						else
 							daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(swagSpeed * daNote.LocalScrollSpeed, 2)));
-					default:
+					default: //fixed the note system xd
 						if (FlxG.save.data.downscroll)
-							daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (-0.45 * FlxMath.roundDecimal(SONG.speed * daNote.LocalScrollSpeed, 2)));
+							daNote.y = (arrowJunks[daNote.mustPress ? daNote.noteData + 4 : daNote.noteData][1] - (Conductor.songPosition - daNote.strumTime) * (-0.45 * FlxMath.roundDecimal(SONG.speed * daNote.LocalScrollSpeed, 2)));
 						else
-							daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed * daNote.LocalScrollSpeed, 2)));
+							daNote.y = (arrowJunks[daNote.mustPress ? daNote.noteData + 4 : daNote.noteData][1] - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed * daNote.LocalScrollSpeed, 2)));
 				}
 				// trace(daNote.y);
 				// WIP interpolation shit? Need to fix the pause issue
@@ -3636,6 +3674,25 @@ class PlayState extends MusicBeatState
 				camHUD.shake(0.0045, 0.1);
 			}
 			boyfriend.playAnim('sing' + fuckingDumbassBullshitFuckYou, true);
+
+			var camVal1 = 0;
+			var camVal2 = 0;
+			switch(notestuffs[Math.round(Math.abs(note.noteData)) % 4])
+			{
+				case 'LEFT':
+					camVal1 -= 30;
+				case 'DOWN':
+					camVal2 += 30;
+				case 'UP':
+					camVal2 -= 30;
+				case 'RIGHT':
+					camVal1 += 30;
+			}
+			if (boyfriend.animation.curAnim.name.contains('sing')) {
+				bfNoteCamOffset[0] = camVal1;
+				bfNoteCamOffset[1] = camVal2;
+			}
+
 			if (UsingNewCam)
 			{
 				focusOnDadGlobal = false;
@@ -3776,16 +3833,6 @@ class PlayState extends MusicBeatState
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
 		iconP2.cameras = [camHUD];
-	}
-
-	function PlayANIMATION(Player:Int, AnimName:Dynamic) {
-		if (Player == 3){
-			gf.playAnim(AnimName, true);
-		} else if (Player == 2) {
-			dad.playAnim(AnimName, true);
-		} else if (Player == 1) {
-			boyfriend.playAnim(AnimName, true);
-		}
 	}
 
 	override function stepHit()

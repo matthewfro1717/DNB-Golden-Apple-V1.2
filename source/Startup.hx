@@ -60,7 +60,7 @@ class Startup extends MusicBeatState
 		itdone.screenCenter();
 		add(itdone);
 
-		new FlxTimer().start(0.1, function(tmr:FlxTimer) {
+		new FlxTimer().start(0.2, function(tmr:FlxTimer) {
 			if (FlxG.save.data.preload == 1) {
 				for (i in 0...cacheStuff.length) {
 					preload(cacheStuff[i]);
@@ -75,7 +75,7 @@ class Startup extends MusicBeatState
 	}
 
 	function startVid() {
-		new FlxTimer().start(0.1, function(tmr:FlxTimer) {
+		new FlxTimer().start(1, function(tmr:FlxTimer) {
 			remove(bg);
 			remove(pieEater);
 			remove(itdone);

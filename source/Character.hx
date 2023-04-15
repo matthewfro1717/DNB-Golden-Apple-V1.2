@@ -93,7 +93,7 @@ class Character extends FlxSprite
 	
 				addOffset('idle', 0, 0);
 				addOffset("singUP", 110, 126);
-				addOffset("singRIGHT", 58, 17);
+				addOffset("singRIGHT", -59, 17);
 				addOffset("singLEFT", 11, 17);
 				addOffset("singDOWN", 2, -3);
 	
@@ -121,10 +121,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWNmiss', 'MDOWN', 24, false);
 	
 				addOffset('idle', 0, 0);
-				addOffset("singUP", 110, 126);
+				addOffset("singUP", 109, 129);
 				addOffset("singLEFT", 58, 17);
-				addOffset("singRIGHT", 11, 17);
-				addOffset("singDOWN", 2, -3);
+				addOffset("singRIGHT", 11, 13);
+				addOffset("singDOWN", -1, -3);
 	
 				addOffset("singUPmiss", 114, 118);
 				addOffset("singRIGHTmiss", 114, 118);
@@ -744,6 +744,37 @@ class Character extends FlxSprite
 				addOffset("talk", -4, 13);
 
 				flipX = true;
+
+				playAnim('idle');
+			case 'bamb-root':
+				tex = Paths.getSparrowAtlas('characters/root_bamber');
+				frames = tex;
+				animation.addByPrefix('idle', 'idle', 24, false);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", -10, 9);
+				addOffset("singRIGHT", 0, 0);
+				addOffset("singLEFT", 10, -5);
+				addOffset("singDOWN", -15, -5);
+
+				playAnim('idle');
+			case 'insanidave':
+				frames = Paths.getSparrowAtlas('characters/insanidave');
+				animation.addByPrefix('idle', 'IDLE', 24, false);
+				animation.addByPrefix('singUP', 'UP', 24, false);
+				animation.addByPrefix('singRIGHT', 'RIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", -10, 9);
+				addOffset("singRIGHT", 0, 0);
+				addOffset("singLEFT", 10, -5);
+				addOffset("singDOWN", -15, -5);
 
 				playAnim('idle');
 			case 'unfair-junker':

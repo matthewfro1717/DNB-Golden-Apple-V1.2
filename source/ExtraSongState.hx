@@ -21,7 +21,6 @@ using StringTools;
 
 class ExtraSongState extends MusicBeatState
 {
-
     var songs:Array<SongMetadata> = [];
 
     var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
@@ -60,7 +59,7 @@ class ExtraSongState extends MusicBeatState
 		switch (category) {
 			case 0:
 				//extra songs
-				addWeek(['Sugar-Rush', 'Origin'], 2, ['bandu', 'bandu-origin']);
+				addWeek(['Sugar-Rush', 'Origin', 'Cuberoot'], 2, ['bandu', 'bandu-origin', 'dave']);
 				//have to add other songs
 			case 1:
 				//oc songs
@@ -182,7 +181,7 @@ class ExtraSongState extends MusicBeatState
 					PlayState.formoverride = 'none';
 
                     PlayState.storyWeek = songs[curSelected].week;
-					if(songs[curSelected].songName.toLowerCase() == 'cycles')
+					if(songs[curSelected].songName.toLowerCase() == 'cuberoot' || songs[curSelected].songName.toLowerCase() == 'cycles')
 					{
 						LoadingState.loadAndSwitchState(new PlayState());
 					}
@@ -193,6 +192,16 @@ class ExtraSongState extends MusicBeatState
             }
 		}
     }
+
+	override function beatHit() {
+		super.beatHit();
+
+		for (i in 0...iconArray.length){
+			iconArray[i].scale.x = 1.1;
+			iconArray[i].scale.y = 1.1;
+			FlxTween.tween(iconArray[i].scale, {x: 1, y: 1}, 0.2);
+		}
+	}
 
     function changeSelection(change:Int = 0)
 	{

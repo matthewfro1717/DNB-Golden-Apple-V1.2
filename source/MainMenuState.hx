@@ -28,7 +28,7 @@ class MainMenuState extends MusicBeatState
 
 	var realMenuItems:Int = 4;
 
-	var optionShit:Array<String> = ['play', 'ost', 'credits', 'options', 'discord', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'dave x bambi shipping cute'];
+	var optionShit:Array<String> = ['play', 'options', 'credits', 'discord', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'dave x bambi shipping cute'];
 
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
@@ -37,13 +37,6 @@ class MainMenuState extends MusicBeatState
 	public static var firstStart:Bool = true;
 
 	public static var finishedFunnyMove:Bool = false;
-
-	public static var daRealEngineVer:String = 'Dave';
-
-	public static var engineVers:Array<String> = ['Golden Apple'];
-
-	public static var kadeEngineVer:String = "DAVE";
-	public static var gameVer:String = "0.2.7.1";
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
@@ -79,8 +72,6 @@ class MainMenuState extends MusicBeatState
 		{
 			FlxG.save.data.unlockedcharacters = [true,true,false,false,false,false];
 		}
-
-		daRealEngineVer = engineVers[FlxG.random.int(0, 0)];
 		
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(randomizeBG());
 		bg.scrollFactor.set();
@@ -150,7 +141,7 @@ class MainMenuState extends MusicBeatState
 		fortniteShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(fortniteShit);
 
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, gameVer + " FNF - " + daRealEngineVer + " Engine", 12);
+		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "1.2 Golden Apple Engine", 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -204,6 +195,11 @@ class MainMenuState extends MusicBeatState
 			{
 				if(optionShit[curSelected] == '')
 				{
+					return;
+				}
+				if(optionShit[curSelected] == 'credits')
+				{
+					fancyOpenURL('https://docs.google.com/document/d/14XHPD53QQILlwTKla0aE5zvEqU9hiAqRw5D3g1QVKl0/edit');
 					return;
 				}
 				if(optionShit[curSelected] == 'discord')

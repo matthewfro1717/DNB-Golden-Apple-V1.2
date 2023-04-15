@@ -39,13 +39,6 @@ class PlayMenuState extends MusicBeatState
 
 	public static var finishedFunnyMove:Bool = false;
 
-	public static var daRealEngineVer:String = 'Golden Apple';
-
-	public static var engineVers:Array<String> = ['Golden Apple'];
-
-	public static var kadeEngineVer:String = "Golden Apple";
-	public static var gameVer:String = "0.2.7.1";
-
 	var lerpScore:Int = 0;
 	var intendedScore:Int = 0;
 
@@ -85,8 +78,6 @@ class PlayMenuState extends MusicBeatState
 		{
 			FlxG.save.data.unlockedcharacters = [true,true,false,false,false,false];
 		}
-
-		daRealEngineVer = engineVers[FlxG.random.int(0, 0)];
 		
 		bg = new FlxSprite(-80).loadGraphic(Paths.image('menu/${optionShit[0]}'));
 		bg.scrollFactor.set();
@@ -141,7 +132,7 @@ class PlayMenuState extends MusicBeatState
 
 		firstStart = false;
 
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, gameVer + " FNF - " + daRealEngineVer + " Engine", 12);
+		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "1.2 Golden Apple Engine", 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);

@@ -124,7 +124,7 @@ class CharacterSelectState extends MusicBeatState
 		//create character
 		char = new Boyfriend(FlxG.width / 2, FlxG.height / 2, "bf");
 		char.screenCenter();
-		char.y = 450;
+		char.y = -25;
 		add(char);
 		
 		characterText = new FlxText((FlxG.width / 9) - 50, (FlxG.height / 8) - 225, "Boyfriend");
@@ -141,7 +141,7 @@ class CharacterSelectState extends MusicBeatState
 		funnyIconMan.visible = false;
 		add(funnyIconMan);
 
-		var tutorialThing:FlxSprite = new FlxSprite(-100, -100).loadGraphic(Paths.image('charSelectGuide'));
+		var tutorialThing:FlxSprite = new FlxSprite(-100, -50).loadGraphic(Paths.image('charSelectGuide'));
 		tutorialThing.setGraphicSize(Std.int(tutorialThing.width * 1.5));
 		tutorialThing.antialiasing = true;
 		add(tutorialThing);
@@ -284,7 +284,7 @@ class CharacterSelectState extends MusicBeatState
 			case 'bambi-angey':
 				char.y = 100 + 450;
 			case 'bf' | '3d-bf' | 'bf-pixel' | 'bf-christmas':
-				//dont do anything
+				char.y = -25;
 			default: char.y = 100;
 		}
 		add(char);
