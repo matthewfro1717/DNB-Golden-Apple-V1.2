@@ -45,6 +45,7 @@ class PlayMenuState extends MusicBeatState
 	var bg:FlxSprite;
 
 	var magenta:FlxSprite;
+	var difSpr:FlxSprite;
 	var camFollow:FlxObject;
 	public static var bgPaths:Array<String> = 
 	[
@@ -132,9 +133,17 @@ class PlayMenuState extends MusicBeatState
 
 		firstStart = false;
 
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "1.2 Golden Apple Engine", 12);
+		difSpr = new FlxSprite(0, 0).loadGraphic(Paths.image('diff/hard'));
+		difSpr.scale.set(0.5, 0.5);
+		difSpr.scrollFactor.set();
+		difSpr.screenCenter();
+		difSpr.x *= 2.35;
+		difSpr.y *= 3.2;
+		add(difSpr);
+
+		var versionShit:FlxText = new FlxText(5, FlxG.height - 24, 0, "1.2 Golden Apple Engine", 12);
 		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
 		if (FlxG.save.data.dfjk)
@@ -194,8 +203,13 @@ class PlayMenuState extends MusicBeatState
 					{
 						FlxTween.tween(spr, {alpha: 0}, 1.3, {
 							ease: FlxEase.quadOut,
+							onUpdate: function(twn:FlxTween)
+							{
+								difSpr.alpha = spr.alpha;
+							},
 							onComplete: function(twn:FlxTween)
 							{
+								difSpr.kill();
 								spr.kill();
 							}
 						});
@@ -212,23 +226,18 @@ class PlayMenuState extends MusicBeatState
 								case 'extras':
 									FlxG.switchState(new CategorySelect());
 								default:
-									if (FileSystem.exists('assets/data/' + daChoice.toLowerCase() + '/' + daChoice.toLowerCase() + '.json')) { //debuging lol
-										var poop:String = Highscore.formatSong(daChoice, 1);
-										trace(poop);
+									var poop:String = Highscore.formatSong(daChoice, 1);
+									trace(poop);
 							
-										PlayState.SONG = Song.loadFromJson(poop, daChoice);
-										PlayState.isStoryMode = false;
-										PlayState.storyDifficulty = 1;
-										PlayState.xtraSong = false;
+									PlayState.SONG = Song.loadFromJson(poop, daChoice);
+									PlayState.isStoryMode = false;
+									PlayState.storyDifficulty = 1;
+									PlayState.xtraSong = false;
 							
-										PlayState.storyWeek = 1;
-										PlayState.characteroverride = 'none';
-										PlayState.formoverride = 'none';
-										LoadingState.loadAndSwitchState(new PlayState());
-									} else {
-										Lib.application.window.alert("the song " + daChoice + " doesn't seem to have a json or folder", "Haxe is amazing.");
-										FlxG.switchState(new PlayMenuState());
-									}
+									PlayState.storyWeek = 1;
+									PlayState.characteroverride = 'none';
+									PlayState.formoverride = 'none';
+									LoadingState.loadAndSwitchState(new PlayState());
 							}
 						});
 					}
@@ -284,6 +293,21 @@ class PlayMenuState extends MusicBeatState
 		bg.setGraphicSize(1280);
 		bg.updateHitbox();
 		bg.screenCenter();
+
+		var optionShit:Array<String> = ['disruption', 'applecore', 'disability', 'wireframe', 'algebra', 'deformation', 'ferocious', 'extras'];
+
+		difSpr.visible = true;
+
+		switch (curSelected) {
+			case 1:
+				difSpr.loadGraphic(Paths.image('diff/extreme'));
+			case 2 | 3:
+				difSpr.loadGraphic(Paths.image('diff/normal'));
+			case 7:
+				difSpr.visible = false;
+			default:
+				difSpr.loadGraphic(Paths.image('diff/hard'));
+		}
 	}
 	public static function randomizeBG():flixel.system.FlxAssets.FlxGraphicAsset
 	{

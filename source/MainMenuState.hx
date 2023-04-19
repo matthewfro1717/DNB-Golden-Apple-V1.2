@@ -136,14 +136,14 @@ class MainMenuState extends MusicBeatState
 
 		firstStart = false;
 
-		var fortniteShit:FlxText = new FlxText(5, FlxG.height - 34, 0, "Source code by: JuniorNovoa and MemeHoovy.", 12);
+		var fortniteShit:FlxText = new FlxText(5, FlxG.height - 40, 0, "Source code by: JuniorNovoa and MemeHoovy.", 12);
 		fortniteShit.scrollFactor.set();
-		fortniteShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		fortniteShit.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(fortniteShit);
 
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "1.2 Golden Apple Engine", 12);
+		var versionShit:FlxText = new FlxText(5, FlxG.height - 24, 0, "1.2 Golden Apple Engine", 12);
 		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
 		if (FlxG.save.data.dfjk)

@@ -59,19 +59,21 @@ class ExtraSongState extends MusicBeatState
 		switch (category) {
 			case 0:
 				//extra songs
-				addWeek(['Sugar-Rush', 'Origin', 'Cuberoot'], 2, ['bandu', 'bandu-origin', 'dave']);
+				addWeek(['Sugar-Rush', 'Gift-Card', 'The-Big-Dingle', 'Dale', 'Origin', 'Apprentice', 'Resumed', 'Ready-Loud', 'Bookworm', 'Cuberoot', 'Alternate',
+				'Unhinged', 'Theft', 'Too Shiny'], 2, ['bandu', 'bandu', 'dingle', 'dale', 'bandu-origin', 'tristan', 'dambu', 'flumpt', 'bookworm', 'disability', 'david',
+				'unhinged', 'garrett', 'diamond']);
 				//have to add other songs
 			case 1:
 				//oc songs
-				addWeek(['Metallic', 'Strawberry', 'Keyboard'], 2, ['ringi', 'bambom', 'bendu']);
+				addWeek(['Tantalum', 'Strawberry', 'Keyboard', 'Sillier'], 2, ['ringi', 'bambom', 'bendu', '']);
 				//have to add other songs
 			case 2:
 				//joke songs
-				addWeek(['Wheels'], 1, ['dave-wheels']);
+				addWeek(['Wheels', 'Poopers', 'The-Boopadoop-Song'], 1, ['dave-wheels', 'awesome_son', 'cynda']);
 				//have to add other songs
 			case 3:
 				//if you know songs
-				addWeek(['Og'], 1, ['null']);
+				addWeek(['Og', 'Sick Tricks', 'Galactic'], 1, ['prealpha', 'roblos', 'super']);
 				//have to add other songs
 			case 4:
 				//secret songs
@@ -82,8 +84,7 @@ class ExtraSongState extends MusicBeatState
 				//since there is nothing there is gonna be a null object reference
 			case 6:
 				//cover songs
-				addWeek(['Thunderstorm'], 1, ['dave-png']);
-				addWeek(['Cycles'], 2, ['sart-producer']);
+				addWeek(['Sunshine', 'Left-Unchecked', 'Thunderstorm', 'Collision'], 2, ['doll', 'unchecked_icon', 'dave-png', 'diamond']);
 				//have to add other songs
 		}
 
