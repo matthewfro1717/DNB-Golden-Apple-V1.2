@@ -164,18 +164,18 @@ class CategorySelect extends MusicBeatState
 	}
 
 	function acceptShit() {
-		var timer:Float = 0.6;
-		FlxTween.tween(bg.scale, {x: 0.925, y: 0.925}, timer, {ease: FlxEase.quadInOut});
+		var timer:Float = 1;
+		var tween = FlxEase.sineIn;
+		var scale:Float = 0.65;
+		FlxTween.tween(bg.scale, {x: scale, y: scale}, timer, {ease: tween});
 
 		sprites.forEach(function(spr:FlxSprite){
 			if (spr.visible == true)
-				FlxTween.tween(spr.scale, {x: 3, y: 3}, timer, {ease: FlxEase.quadInOut,
-					onComplete: function(thing:FlxTween) {
-						new FlxTimer().start(0.4, function(tmr:FlxTimer) {
-							FlxG.switchState(new ExtraSongState());
-						});
-					}
-				});
+				FlxTween.tween(spr.scale, {x: 5, y: 5}, timer, {ease: tween});
+		});
+
+		new FlxTimer().start(scale * 0.9, function(tmr:FlxTimer) {
+			FlxG.switchState(new ExtraSongState());
 		});
 
 		FlxG.sound.play(Paths.sound('confirmMenu'));

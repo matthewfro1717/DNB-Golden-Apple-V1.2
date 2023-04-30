@@ -60,7 +60,7 @@ class ExtraSongState extends MusicBeatState
 			case 0:
 				//extra songs
 				addWeek(['Sugar-Rush', 'Gift-Card', 'The-Big-Dingle', 'Dale', 'Origin', 'Apprentice', 'Resumed', 'Ready-Loud', 'Bookworm', 'Cuberoot', 'Alternate',
-				'Unhinged', 'Theft', 'Too Shiny'], 2, ['bandu', 'bandu', 'dingle', 'dale', 'bandu-origin', 'tristan', 'dambu', 'flumpt', 'bookworm', 'disability', 'david',
+				'Unhinged', 'Theft', 'Too-Shiny'], 2, ['bandu', 'bandu', 'dingle', 'dale', 'bandu-origin', 'tristan', 'dambu', 'flumpt', 'bookworm', 'disability', 'david',
 				'unhinged', 'garrett', 'diamond']);
 				//have to add other songs
 			case 1:
@@ -73,7 +73,7 @@ class ExtraSongState extends MusicBeatState
 				//have to add other songs
 			case 3:
 				//if you know songs
-				addWeek(['Og', 'Sick Tricks', 'Galactic'], 1, ['prealpha', 'roblos', 'super']);
+				addWeek(['Og', 'Sick-Tricks', 'Galactic'], 1, ['prealpha', 'roblos', 'super']);
 				//have to add other songs
 			case 4:
 				//secret songs

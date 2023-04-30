@@ -52,34 +52,34 @@ class HealthIcon extends FlxSprite
 
 		this.isPlayer = isPlayer;
 
-		charPublic = char;
+		changeIcon(char);
 
-		if(char != 'bandu-origin' && Assets.exists('assets/images/icons/$char.png')) {
-			loadGraphic(Paths.image('icons/$char'), true, 150, 150);
-			addIcon(char, 0);
-			animation.play(char);
-		} else if (char == 'bandu-origin' && Assets.exists('assets/images/icons/bandu_origin_icon.png') && Assets.exists('assets/images/icons/bandu_origin_icon.xml')) {
-			frames = Paths.getSparrowAtlas('icons/bandu_origin_icon');
-			animation.addByPrefix(char, char, 24, false, isPlayer, false);
-		} else {
-			loadGraphic(Paths.image('icons/face'), true, 150, 150);
-			addIcon('face', 0);
-			animation.play('face');
-		}
-
-		antialiasing = true;
-
-		//animation.play(char);
-
-		if (noAaChars.contains(char))
-		{
-			antialiasing = false;
-		}
 		scrollFactor.set();
 	}
 
 	function addIcon(char:String, startFrame:Int, singleIcon:Bool = false) {
 		animation.add(char, !singleIcon ? [startFrame, startFrame + 1] : [startFrame], 0, false, isPlayer);
+	}
+
+	public function changeIcon(char:String = 'face')
+	{
+		charPublic = char;
+
+		if(char != 'bandu-origin')
+		{
+			loadGraphic(Paths.image('icons/$char'), true, 150, 150);
+
+			addIcon(char, 0);
+		}
+		else
+		{
+			frames = Paths.getSparrowAtlas('icons/bandu_origin_icon');
+			animation.addByPrefix(char, char, 24, false, isPlayer, false);
+		}
+
+		antialiasing = !noAaChars.contains(char);
+
+		animation.play(char);
 	}
 
 	override function update(elapsed:Float)

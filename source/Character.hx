@@ -24,6 +24,8 @@ class Character extends FlxSprite
 
 	public var globaloffset:Array<Float> = [0,0];
 
+	public var iconName = 'face';
+
 	public function new(x:Float, y:Float, ?character:String = "bf", ?isPlayer:Bool = false)
 	{
 		super(x, y);
@@ -105,6 +107,8 @@ class Character extends FlxSprite
 				nativelyPlayable = flipX = true;
 
 				antialiasing = false;
+
+				iconName = '3d-bf';
 
 				playAnim('idle');
 			case '3d-bf-flipped':
@@ -488,6 +492,8 @@ class Character extends FlxSprite
 				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
 				updateHitbox();
 				antialiasing = false;
+
+				iconName = 'badai';
 		
 				playAnim('idle');
 
@@ -649,6 +655,8 @@ class Character extends FlxSprite
 				setGraphicSize(Std.int(width / furiosityScale));
 				updateHitbox();
 
+				iconName = 'bandu';
+
 				antialiasing = false;
 
 				playAnim('idle');
@@ -680,6 +688,8 @@ class Character extends FlxSprite
 				setGraphicSize(Std.int(width / furiosityScale));
 				updateHitbox();
 
+				iconName = 'bandu';
+
 				antialiasing = false;
 
 				playAnim('danceLeft');
@@ -703,6 +713,8 @@ class Character extends FlxSprite
 				setGraphicSize(Std.int((width * 1.3) / furiosityScale));
 				updateHitbox();
 				antialiasing = false;
+
+				iconName = 'disrupt';
 		
 				playAnim('idle');
 			case 'bambi-good':
@@ -761,6 +773,8 @@ class Character extends FlxSprite
 				addOffset("singLEFT", 10, -5);
 				addOffset("singDOWN", -15, -5);
 
+				iconName = 'bambroot';
+
 				playAnim('idle');
 			case 'insanidave':
 				frames = Paths.getSparrowAtlas('characters/insanidave');
@@ -775,6 +789,8 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", 0, 0);
 				addOffset("singLEFT", 10, -5);
 				addOffset("singDOWN", -15, -5);
+
+				iconName = 'disability';
 
 				playAnim('idle');
 			case 'unfair-junker':
@@ -841,6 +857,7 @@ class Character extends FlxSprite
 
 				flipX = true;
 
+				iconName = 'bf';
 			case 'tunnel-bf':
 				var tex = Paths.getSparrowAtlas('characters/tunnel_bf');
 				frames = tex;
@@ -864,6 +881,8 @@ class Character extends FlxSprite
 				flipX = true;
 
 				nativelyPlayable = true;
+
+				iconName = 'bf';
 			//tunnel-bf-flipped cuz im STUPID
 			case 'tunnel-bf-flipped':
 				var tex = Paths.getSparrowAtlas('characters/tunnel_bf');
@@ -1093,6 +1112,8 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 2, -33);
 				
 				playAnim('idle');
+
+				iconName = 'og-dave';
 		}
 		dance();
 
