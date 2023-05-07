@@ -26,7 +26,8 @@ jobs:
           RefreshEnv
           mkdir "%HAXELIB_ROOT%"
           haxelib setup "%HAXELIB_ROOT%"
-          haxelib install lime 7.9.0
+          haxelib --global update haxelib          
+          haxelib install lime
           RefreshEnv
           haxelib install openfl
           haxelib install flixel
