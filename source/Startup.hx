@@ -20,7 +20,7 @@ import flixel.graphics.FlxGraphic;
 #if desktop
 import Discord.DiscordClient;
 
-import vlc.MP4Handler;
+import hxcodec.VideoHandler;
 #end
 
 using StringTools;
@@ -79,7 +79,7 @@ class Startup extends MusicBeatState
 			remove(bg);
 			remove(pieEater);
 			remove(itdone);
-			var video:MP4Handler = new MP4Handler();
+			var video:VideoHandler = new VideoHandler();
 			video.playVideo(Paths.video('startupIntro'));
 			video.finishCallback = function()
 			{
