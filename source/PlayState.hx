@@ -3316,8 +3316,6 @@ class PlayState extends MusicBeatState
 				},
 				startDelay: Conductor.crochet * 0.001
 			});
-
-			curSection += 1;
 		}
 	}
 
