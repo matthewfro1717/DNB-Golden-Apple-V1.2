@@ -51,6 +51,12 @@ class SaveDataHandler
 		if (FlxG.save.data.rightKey == null)
 			FlxG.save.data.rightKey = FlxKey.D;
 
+		if (FlxG.save.data.practicemode == null)
+			FlxG.save.data.practicemode = false;
+
+		if (FlxG.save.data.botplay == null)
+			FlxG.save.data.botplay = false;
+
 		if (FlxG.save.data.preload == null)
 			FlxG.save.data.preload = 1;
     }
