@@ -35,6 +35,10 @@ class OutdatedSubState extends MusicBeatState
 		txt.screenCenter();
 		txt.antialiasing = true;
 		add(txt);
+
+		#if android
+		addVirtualPad(NONE, A_B_C);
+		#end
 	}
 
 	override function update(elapsed:Float)
@@ -44,14 +48,14 @@ class OutdatedSubState extends MusicBeatState
 			leftState = true;
 			FlxG.switchState(new MainMenuState());
 		}
-		if (FlxG.keys.justPressed.Y && FlxG.save.data.begin_thing != true)
+		if (FlxG.keys.justPressed.Y #if android || virtualPad.buttonC.justPressed #end && FlxG.save.data.begin_thing != true)
 		{
 			FlxG.save.data.begin_thing = true;
 			FlxG.save.data.eyesores = true;
 			leftState = true;
 			FlxG.switchState(new MainMenuState());
 		}
-		if (FlxG.keys.justPressed.N && FlxG.save.data.begin_thing != true)
+		if (FlxG.keys.justPressed.N #if android || virtualPad.buttonB.justPressed #end && FlxG.save.data.begin_thing != true)
 		{
 			FlxG.save.data.begin_thing = true;
 			FlxG.save.data.eyesores = false;
