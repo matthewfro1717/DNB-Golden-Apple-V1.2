@@ -33,6 +33,8 @@
 
 	<classpath name="source" />
 
+	<assets path="assets/android" if="android"/> <!-- to not have the android assets in another builds -saw -->
+
 	<assets path="assets/preload" rename="assets" exclude="*.ogg" if="web"/>
 	<assets path="assets/preload" rename="assets" exclude="*.mp3" unless="web"/>
 	
@@ -77,6 +79,8 @@
 
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
+	<haxelib name="hxCodec" if="desktop || android" />
+	<haxelib name="extension-androidtools" if="android"/>
 	<haxelib name="discord_rpc" if="desktop"/>
 	<setenv name="next" />
 	<!-- <haxelib name="hxcpp-debug-server" if="desktop"/> -->
@@ -98,6 +102,12 @@
 	<!--Used for Izzy Engine's crash handler-->
 	<haxedef name="HXCPP_CHECK_POINTER" />
 	<haxedef name="HXCPP_STACK_LINE" />
+
+	<!-- _________________________________ Android Stuff _______________________________ -->
+	<config:android permission="android.permission.READ_EXTERNAL_STORAGE" if="android"/>
+	<config:android permission="android.permission.WRITE_EXTERNAL_STORAGE" if="android"/>
+	<config:android gradle-version="7.5.1" />
+    <config:android gradle-plugin="7.3.1" />
 
 	<!-- _________________________________ Custom _______________________________ -->
 

@@ -54,6 +54,13 @@ class CreditsMenuState extends MusicBeatState
    var hasSocialMedia:Bool = true;
    var peopleInCredits:Array<Person> = 
    [
+      //android porter
+      new Person("Stefan20008", CreditsType.Dev, "Android porter",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCKbKOSJPbP4u81cpBpoSntw'),
+            new Social('twitter', 'https://twitter.com/GrantareP')
+         ]
+      ),
       //devs
       new Person("Grantare", CreditsType.Dev, "Director, Programmer, Composer, Animator, Charter",
          [
