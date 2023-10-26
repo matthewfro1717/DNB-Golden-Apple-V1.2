@@ -3315,7 +3315,8 @@ class PlayState extends MusicBeatState
 					rating.destroy();
 				},
 				startDelay: Conductor.crochet * 0.001
-			});
+			        });
+	        	}
 		}
 	}
 
